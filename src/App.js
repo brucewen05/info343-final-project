@@ -23,7 +23,7 @@ class App extends Component {
                 <Link to="/FAQs">FAQs</Link>
                 <Link to="/events">Events</Link>
                 {/*need to look at how to deal with this later! */}
-                <a onClick={this.dummy}><Icon name="input" />{' '}Sign out</a>
+                <a onClick={this.dummy} className="sign-out-button"><Icon name="input" />{' '}Sign out</a>
             </Navigation>
         </Drawer>
         <Content>

@@ -60,7 +60,7 @@ class SignInPage extends React.Component {
     render() {
         return (
             <div>
-                <Header title="Sign Up" />
+                <Header title="Sign In" />
                 <Grid>
                     <Cell offset={1} col={10}><SignInForm /></Cell>
                 </Grid>
