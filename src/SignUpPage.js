@@ -1,7 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Button, Header, Grid, Cell} from 'react-mdl';
-import {Link} from 'react-router';
+import {Button, Header, Grid, Cell, Dialog, DialogActions, DialogContent, Spinner} from 'react-mdl';
+import {Link, hashHistory} from 'react-router';
+import firebase from 'firebase';
 
 class SignUpForm extends React.Component {
   constructor(props){
@@ -10,11 +11,13 @@ class SignUpForm extends React.Component {
       email:{value:'',valid:false},
       name:{value:'',valid:false},
       password:{value:'',valid:false},
-      passwordConf:{value:'',valid:false}
+      passwordConf:{value:'',valid:false},
+      showSpinner:false,
+      errorMessage: ''
     };
 
     this.updateState = this.updateState.bind(this); //bind for scope
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
   //callback for updating the state with child information
@@ -23,17 +26,45 @@ class SignUpForm extends React.Component {
   }
 
   //callback for the submit button
-  handleSubmit(event) {
+  handleSignUp(event) {
     event.preventDefault();
     console.log("submit!");
+    this.setState({showSpinner:true});
+
+    /* Create a new user and save their information */
+    firebase.auth().createUserWithEmailAndPassword(this.state.email.value, this.state.password.value)
+      .then((firebaseUser) => {
+        //include information (for app-level content)
+        var profilePromise = firebaseUser.updateProfile({
+          displayName: this.state.name.value,
+        }); //return promise for chaining
+        return profilePromise;
+      })
+      .catch((err) => {this.setState({errorMessage: err.message, showSpinner:false})})
+      .then(() => {
+        // turn off the spinner and
+        // redirect to the channel page
+        this.setState({showSpinner:false});
+        hashHistory.push("/main");
+      });
+  }
+
+  closeModal() {
+    this.setState({errorMessage: '', showSpinner:false});
   }
 
   render() {
     //if all fields are valid, button should be enabled
     var buttonEnabled = (this.state.email.valid && this.state.name.valid && this.state.password.valid && this.state.passwordConf.valid);
+
+    var spinnerSytle={'display':'none'};
+    if (this.state.showSpinner) {
+      spinnerSytle={};
+    }
+
     return (
       <div>
-        <form name="signupForm" onSubmit={(e) => this.handleSubmit(e)}>
+        <form name="signupForm" onSubmit={(e) => this.handleSignUp(e)}>
 
           <EmailInput value={this.state.email.value} updateParent={this.updateState} />
 
@@ -53,12 +84,20 @@ class SignUpForm extends React.Component {
 
           <PasswordConfirmationInput value={this.state.passwordConf.value} password={this.state.password.value} updateParent={this.updateState}/>
           <div>
-            <Button raised colored id="submitButton" type="submit" disabled={!buttonEnabled} onClick={this.handleSubmit}>Sign Me Up!</Button>
+            <Button raised colored id="submitButton" type="submit" disabled={!buttonEnabled} onClick={this.handleSignUp}><Spinner style={spinnerSytle} />{' '}Sign Me Up!</Button>
           </div>
             <span>Aready have an account with us?</span>{' '} <Link to="/login">Sign In</Link>
           <div>
           </div>           
         </form>
+        <Dialog open={this.state.errorMessage !== ''} >
+            <DialogContent>
+              {this.state.errorMessage}
+            </DialogContent>
+            <DialogActions>
+                <Button type='button' onClick={this.closeModal} colored raised>close</Button>
+            </DialogActions>
+        </Dialog>
       </div>
     );
   }
@@ -222,6 +261,25 @@ class PasswordConfirmationInput extends React.Component {
 }
 
 class SignUpPage extends React.Component {
+    componentDidMount() {
+        /* Add a listener and callback for authentication events */
+        this.unregister = firebase.auth().onAuthStateChanged(user => {
+            if(user) {
+                console.log('Auth state changed: logged in as', user.email);
+                hashHistory.push("/main");
+            }
+            else{
+                console.log('Auth state changed: logged out');
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        if(this.unregister) {
+            this.unregister();
+        }
+    }
+    
     render() {
         return (
             <div>

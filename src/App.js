@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import {Layout, Drawer, Navigation, Content, Icon} from 'react-mdl';
 import './App.css';
+import firebase from 'firebase';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.dummy = this.dummy.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
-  dummy() {
-    console.log("app dummy!");
+
+  handleSignOut() {
+    if (firebase.auth().currentUser) {
+      console.log("about to sign out");
+      firebase.auth().signOut();
+    }
   }
 
   render() {
@@ -23,7 +28,7 @@ class App extends Component {
                 <Link to="/FAQs">FAQs</Link>
                 <Link to="/events">Events</Link>
                 {/*need to look at how to deal with this later! */}
-                <a onClick={this.dummy} className="sign-out-button"><Icon name="input" />{' '}Sign out</a>
+                <a onClick={this.handleSignOut} className="sign-out-button"><Icon name="input" />{' '}Sign out</a>
             </Navigation>
         </Drawer>
         <Content>

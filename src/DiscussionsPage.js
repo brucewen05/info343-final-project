@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import {Grid, Cell, Button, Dialog, DialogContent, DialogActions, DialogTitle} from 'react-mdl';
 import 'bootstrap/dist/css/bootstrap.css';
+import firebase from 'firebase';
+import {hashHistory} from 'react-router';
 
 var data = [
     {
@@ -46,6 +48,26 @@ class DiscussionPage extends React.Component {
         this.handleContentInputChange = this.handleContentInputChange.bind(this);
         this.handleTitleInputChange = this.handleTitleInputChange.bind(this);
     }
+
+    componentDidMount() {
+        /* Add a listener and callback for authentication events */
+        this.unregister = firebase.auth().onAuthStateChanged(user => {
+            if(user) {
+                console.log('Auth state changed: logged in as', user.email);
+            }
+            else{
+                console.log('Auth state changed: logged out');
+                hashHistory.push("/login");
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        if(this.unregister) {
+            this.unregister();
+        }
+    }
+
 
     openModal() {
         this.setState({modalOpen:true});
