@@ -149,10 +149,10 @@ class DiscussionPage extends React.Component {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="discussionTitleInput">Title</label> {' '}
-                                <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" />
+                                <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" value={this.state.title}/>
                             </div>
                             <div className="form-group">
-                                <textarea type="text" className="form-control" onChange={this.handleContentInputChange} placeholder="what to discuss" />
+                                <textarea type="text" className="form-control" onChange={this.handleContentInputChange} placeholder="discussion content" value={this.state.content} />
                             </div>
                         </form>
                     </DialogContent>
