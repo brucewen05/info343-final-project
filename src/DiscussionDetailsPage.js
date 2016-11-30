@@ -36,33 +36,29 @@ class DiscussionDetailsPage extends React.Component {
                         conversationsObjArray.push(obj);
                     });
 
-                    this.setState({conversations: conversationsObjArray}, ()=>{console.log("after received new conversations"); console.log(this.state)});
+                    this.setState({conversations: conversationsObjArray});
                 });
 
                 this.likesRef = firebase.database().ref('discussions/' + this.props.params.discussionId + "/likes");
                 this.likesRef.on('value', (snapshot) => {
-                    var likesObjArray = [];
+                    var likesObjs = {};
 
                     snapshot.forEach((child) => {
-                        var obj = {};
-                        obj[child.key] = child.val();
-                        likesObjArray.push(obj);
+                        likesObjs[child.key] = child.val();
                     });
 
-                    this.setState({likes: likesObjArray}, ()=>{console.log("after received new likes"); console.log(this.state)});
+                    this.setState({likes: likesObjs});
                 });
 
                 this.dislikesRef = firebase.database().ref('discussions/' + this.props.params.discussionId + "/dislikes");
                 this.dislikesRef.on('value', (snapshot) => {
-                    var dislikesObjArray = [];
+                    var dislikesObjs = {};
 
                     snapshot.forEach((child) => {
-                        var obj = {};
-                        obj[child.key] = child.val();
-                        dislikesObjArray.push(obj);
+                        dislikesObjs[child.key] = child.val();
                     });
 
-                    this.setState({dislikes: dislikesObjArray}, ()=>{console.log("after received new dislikes"); console.log(this.state)});
+                    this.setState({dislikes: dislikesObjs});
                 });
             }
             else{
@@ -91,8 +87,6 @@ class DiscussionDetailsPage extends React.Component {
     }
 
     render() {
-        console.log("re-render the detail page, likes is:");
-        console.log(this.state.likes);
         return (
             <Grid>
                 <Cell col={12}>
@@ -100,7 +94,13 @@ class DiscussionDetailsPage extends React.Component {
                 </Cell>
                 <Cell col={12}>
                     <ul>
-                        <CreatorItem username={this.state.username} content={this.state.content} createTime={this.state.createTime} editTime={this.state.editTime} discussionId={this.props.params.discussionId} likes={this.state.likes} dislikes={this.state.dislikes}/>
+                        <CreatorItem username={this.state.username}
+                                     content={this.state.content}
+                                     createTime={this.state.createTime}
+                                     editTime={this.state.editTime}
+                                     discussionId={this.props.params.discussionId}
+                                     likes={this.state.likes}
+                                     dislikes={this.state.dislikes}/>
                     </ul>
                 </Cell>
 
@@ -124,9 +124,6 @@ class CreatorItem extends React.Component {
 
         this.state = state;
 
-        console.log("in the constructor");
-        console.log(this.state);
-
         this.handleLike = this.handleLike.bind(this);
         this.handleDislike = this.handleDislike.bind(this);
     }
@@ -134,7 +131,6 @@ class CreatorItem extends React.Component {
     calculateLikesAndDislikes(objs) {
         var count = 0;
         var bool = false;
-        console.log(objs);
         if (objs) {
             Object.keys(objs).forEach((key) => {
                 count++;
@@ -147,14 +143,18 @@ class CreatorItem extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("received new props");
-        console.log(nextProps);
+        var obj = {};
         Object.keys(nextProps).forEach((key) => {
-            if (this.props[key] !== nextProps[key]) {
-                var obj = {};
+            if (key !== 'likes' && key !== 'dislikes' && this.props[key] !== nextProps[key]) {
+                obj = {};
                 obj[key] = nextProps[key];
-                //if (key === 'likes') {console.log("likes!"); console.log(obj)}
-                //this.setState(obj);
+                this.setState(obj);
+            } else if (key === 'likes') {
+                obj = this.calculateLikesAndDislikes(nextProps[key]);
+                this.setState({'likes': obj.count, 'liked':obj.bool});
+            } else if (key === 'dislikes') {
+                obj = this.calculateLikesAndDislikes(nextProps[key]);
+                this.setState({'dislikes': obj.count, 'disliked':obj.bool});
             }
         });
 
