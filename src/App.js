@@ -61,9 +61,9 @@ class App extends Component {
         </DrawerMenu>
       </AppBar>
       </MuiThemeProvider>
-      <Content>
+      <body>
           {this.props.children}
-        </Content>
+      </body>
     </div>
     );
   }

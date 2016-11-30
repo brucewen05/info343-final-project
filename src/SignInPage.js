@@ -75,7 +75,7 @@ class SignInForm extends React.Component {
           </div>
             <span>Don't have an accout yet?</span>{' '} <Link to="/join">Sign Up</Link>
           <div>
-          </div>           
+          </div>
         </form>
         <Dialog open={this.state.errorMessage !== ''} >
             <DialogContent>
@@ -114,11 +114,9 @@ class SignInPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <Header title="Sign In" />
-                <Grid>
-                    <Cell offset={1} col={10}><SignInForm /></Cell>
-                </Grid>
+            <div className="container" id="signInContainer">
+            <h1> Sign In </h1>
+              <SignInForm />
             </div>
         );
     }
