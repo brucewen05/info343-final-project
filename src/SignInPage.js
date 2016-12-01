@@ -65,7 +65,7 @@ class SignInForm extends React.Component {
 
           <RequiredInput
             id="password" field="password" type="password"
-            label="Password" placeholder=""
+            label="Password" placeholder="password"
             errorMessage="your password can't be blank"
             value={this.state.password.value}
             updateParent={this.updateState} />
