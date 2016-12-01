@@ -224,13 +224,13 @@ class ReplyItem extends React.Component {
                             <div><IconButton name="arrow_drop_down" /></div>
                         </div>
                     </Cell>
-                    <Cell col={7}>
+                    <Cell col={11}>
                         <div className="reply-container">
                             <div>{this.props.conversationDetails.username}</div>
                             <div className="reply-content"><p>{this.props.conversationDetails.content}</p></div>
                         </div>
                     </Cell>
-                    <Cell col={8}>
+                    <Cell col={12}>
                         <div className="time-info"><span>posted{' '}<Time value={this.props.conversationDetails.createTime} relative/></span>
                             {this.props.conversationDetails.createTime !== this.props.conversationDetails.editTime
                                 && <span className="edit-time">edited{' '}<Time value={this.props.conversationDetails.editTime} relative/></span>}
