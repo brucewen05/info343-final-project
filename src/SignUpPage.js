@@ -42,9 +42,7 @@ class SignUpForm extends React.Component {
       })
       .catch((err) => {this.setState({errorMessage: err.message, showSpinner:false})})
       .then(() => {
-        // turn off the spinner and
         // redirect to the channel page
-        this.setState({showSpinner:false});
         hashHistory.push("/main");
       });
   }
@@ -64,7 +62,7 @@ class SignUpForm extends React.Component {
 
     return (
       <div>
-        <form name="signupForm" onSubmit={(e) => this.handleSignUp(e)}>
+        <form name="signupForm" >
 
           <EmailInput value={this.state.email.value} updateParent={this.updateState} />
 

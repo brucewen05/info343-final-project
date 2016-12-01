@@ -145,7 +145,6 @@ class DiscussionPage extends React.Component {
                 <Dialog open={this.state.modalOpen} style={{'width':'100%', 'height':'100%'}} >
                     <DialogTitle>Create a new discussion post</DialogTitle>
                     <DialogContent>
-                    {/*need to deal with browser cache later on */}
                         <form>
                             <div className="form-group">
                                 <label htmlFor="discussionTitleInput">Title</label> {' '}
@@ -188,10 +187,10 @@ class DiscussionItem extends React.Component {
                     <div></div>
                     <span className="likes"><i className="glyphicon glyphicon-thumbs-up" />{' '}{likes}</span>
                     <span className="dislikes"><i className="glyphicon glyphicon-thumbs-down" />{' '}{dislikes}</span>
-                    <div className="discussion-info">
+                    <div className="time-info">
                         <span>created{' '}<Time value={this.props.discussionObj.createTime} relative/></span>
                         {this.props.discussionObj.createTime !== this.props.discussionObj.editTime
-                            && <span className="discussion-edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative/></span>}
+                            && <span className="edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative/></span>}
                     </div>
                 </div>
             </Link>

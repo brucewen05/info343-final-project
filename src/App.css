@@ -18,6 +18,93 @@
   font-size: large;
 }
 
+.discussion-details-body {
+  list-style-type: none;
+}
+
+
+.invalid .help-block {
+    color: red;
+}
+
+.invalid input {
+    background-color: #f2dede;
+}
+
+.dicussion-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.time-info {
+    float: right;
+}
+
+.likes {
+    margin-left: 10px;
+}
+
+.dislikes {
+    margin-left: 10px;
+}
+
+.edit-time {
+    margin-left: 10px;
+}
+
+.create-discussion {
+    float:right;
+}
+
+.discussion-page-header h1 {
+    display: inline;
+}
+
+.sign-out-button {
+    cursor: pointer;
+}
+
+.container {
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#signInContainer {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.discussion-owner-controls {
+  float: right;
+}
+
+.votes-container {
+  height: 100%;
+  text-align: center;
+}
+
+.vote-num {
+  margin-top:-6px;
+  margin-bottom: -6px;
+}
+
+.reply-container {
+  padding-top: 6px;
+  text-align: left;
+  height: 150px;
+}
+
+.reply-content {
+  overflow: hidden;
+  white-space: normal;
+  clear: both;
+  text-overflow:ellipsis;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

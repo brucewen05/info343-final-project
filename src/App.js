@@ -40,29 +40,20 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-      <MuiThemeProvider>
-        <AppBar
-          title="Title"
-          iconElementLeft={<IconButton><MenuIcon /></IconButton>}
-          onLeftIconButtonTouchTap={this.handleToggle}
-        >
-        <DrawerMenu
-          docked={false}
-          width={200}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})}
-        >
-          <MenuItem onTouchTap={this.handleClose} href="/#/main">Homepage</MenuItem>
-          <MenuItem onTouchTap={this.handleClose} href="/#/discussions">Discussions</MenuItem>
-          <MenuItem onTouchTap={this.handleClose} href="/#/FAQs">FAQ</MenuItem>
-          <MenuItem onTouchTap={this.handleClose} href="/#/events">Events</MenuItem>
-          <MenuItem onTouchTap={this.handleSignOut}><IconButton><ArrowIcon/></IconButton>Sign out</MenuItem>
-        </DrawerMenu>
-      </AppBar>
-      </MuiThemeProvider>
-          {this.props.children}
-    </div>
+     <Layout fixedDrawer={true}>
+      <Drawer>
+        <Navigation>
+          <Link to="/main">Main Page</Link>
+          <Link to="/discussions">Discussion board</Link>
+          <Link to="/FAQs">FAQs</Link>
+          <Link to="/events">Events</Link>
+          <a onClick={this.handleSignOut}><Icon name="input" />{' '}Sign out</a>
+        </Navigation>
+      </Drawer>
+      <Content>
+        {this.props.children}
+      </Content>
+    </Layout>
     );
   }
 }
