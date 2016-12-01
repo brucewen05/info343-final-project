@@ -80,6 +80,11 @@
   padding-right: 30%;
 }
 
+#signUpContainer {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
 .item-controls {
   float: right;
 }
@@ -155,6 +160,11 @@
   margin-left: 20px;
   font-size: 14px;
   font-weight: bold;
+}
+
+.list-group h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 
 

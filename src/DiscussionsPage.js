@@ -132,11 +132,11 @@ class DiscussionPage extends React.Component {
 
         return (
             <Grid>
-                <Cell col={12} className="discussion-page-header">
+                <Cell col={10} offset={1} className="discussion-page-header" style={{'marginBottom':'30px'}}>
                     <h1>Discussions</h1>
                     <Button raised colored className="create-discussion" onClick={this.openModal}>Create New Discussion</Button>
                 </Cell>
-                <Cell col={12}>
+                <Cell col={10} offset={1}>
                     <div className="list-group">
                         {result}
                     </div>

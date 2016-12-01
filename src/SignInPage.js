@@ -59,7 +59,7 @@ class SignInForm extends React.Component {
     }
     return (
       <div>
-        <form name="signInForm" onSubmit={(e) => this.handleSubmit(e)}>
+        <form name="signInForm" >
 
           <EmailInput value={this.state.email.value} updateParent={this.updateState} />
 
@@ -115,7 +115,7 @@ class SignInPage extends React.Component {
     render() {
         return (
             <div className="container" id="signInContainer">
-            <h1> Sign In </h1>
+              <h1> Sign In </h1>
               <SignInForm />
             </div>
         );

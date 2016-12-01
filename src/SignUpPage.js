@@ -296,11 +296,9 @@ class SignUpPage extends React.Component {
     
     render() {
         return (
-            <div>
-                <Header title="Sign Up" />
-                <Grid>
-                    <Cell offset={1} col={10}><SignUpForm /></Cell>
-                </Grid>
+            <div className="container" id="signUpContainer">
+              <h1> Sign Up </h1>
+              <SignUpForm />
             </div>
         );
     }

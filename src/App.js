@@ -25,11 +25,18 @@ class App extends Component {
     super(props);
     this.state = {open: false};
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.handleSignOut = this.handleSignOut(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle() {
+    this.setState({open: !this.state.open});
+  }
 
-  handleClose = () => this.setState({open: false});
+  handleClose() {
+    this.setState({open: false});
+  }
 
   handleSignOut() {
     if (firebase.auth().currentUser) {
@@ -40,20 +47,29 @@ class App extends Component {
 
   render() {
     return (
-     <Layout fixedDrawer={true}>
-      <Drawer>
-        <Navigation>
-          <Link to="/main">Main Page</Link>
-          <Link to="/discussions">Discussion board</Link>
-          <Link to="/FAQs">FAQs</Link>
-          <Link to="/events">Events</Link>
-          <a onClick={this.handleSignOut}><Icon name="input" />{' '}Sign out</a>
-        </Navigation>
-      </Drawer>
+     <div>
+       <MuiThemeProvider>
+        <AppBar
+          title="Title"
+          iconElementLeft={<IconButton><MenuIcon /></IconButton>}
+          onLeftIconButtonTouchTap={this.handleToggle} >
+          <DrawerMenu
+            docked={false}
+            width={200}
+            open={this.state.open}
+            onRequestChange={(open) => {this.setState({open})} } >
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/main">Homepage</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/FAQs">FAQs</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleSignOut}><IconButton><ArrowIcon/></IconButton>Sign out</MenuItem>
+          </DrawerMenu>
+        </AppBar>
+      </MuiThemeProvider>
       <Content>
         {this.props.children}
       </Content>
-    </Layout>
+    </div>
     );
   }
 }

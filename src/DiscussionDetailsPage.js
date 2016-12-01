@@ -523,7 +523,7 @@ class UserInfo extends React.Component {
         var imgStyle={'borderColor': this.props.photoURL};
         return(
             <div className="user-info">
-                <img  src={noUserPic} style={imgStyle} alt="user picture"/>
+                <img  src={noUserPic} style={imgStyle} role="presentation" />
                 <span className="user-name">{this.props.username}</span>
             </div>
         );
