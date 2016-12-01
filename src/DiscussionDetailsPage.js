@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import Time from 'react-time';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const DELETE_DISCUSSION_THRESHOLD = 3;
+const DELETE_DISCUSSION_THRESHOLD = 2;
 
 class DiscussionDetailsPage extends React.Component {
     constructor(props) {
@@ -57,7 +57,7 @@ class DiscussionDetailsPage extends React.Component {
                         conversationsObjArray.push(obj);
                     });
 
-                    this.setState({conversations: conversationsObjArray}, ()=>{console.log(this.state.conversations)});
+                    this.setState({conversations: conversationsObjArray});
                 });
 
                 this.likesRef = firebase.database().ref('discussions/' + this.props.params.discussionId + "/likes");
@@ -136,7 +136,7 @@ class DiscussionDetailsPage extends React.Component {
 
     render() {
         var replies = this.state.conversations.map((conversationObj)=>{
-            return <ReplyItem conversationDetails={conversationObj.value} key={conversationObj.key} />
+            return <ReplyItem conversationDetails={conversationObj.value} key={conversationObj.key} discussionId={this.props.params.discussionId} threadId={conversationObj.key}/>
         });
 
         return (
@@ -158,7 +158,7 @@ class DiscussionDetailsPage extends React.Component {
                         {replies}
                     </ul>
                 </Cell>
-                <Cell col={12}>
+                <Cell col={10} offset={1}>
                     <ReplyArea discussionId={this.props.params.discussionId} />
                 </Cell>
                 <Dialog open={this.state.tooManyDislikesModalOpen} >
@@ -189,11 +189,19 @@ class ReplyItem extends React.Component {
         super(props);
 
         var voteObj = this.calculateVotes(props.conversationDetails.votes);
-        var state = {};
+        var state = {editMode:false};
         state['votes'] = voteObj['count'];
         state['voted'] = voteObj['bool'];
 
         this.state = state;
+
+        this.handleUpVote = this.handleUpVote.bind(this);
+        this.handleDownVote = this.handleDownVote.bind(this);
+        this.updateVote = this.updateVote.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleClickEdit = this.handleClickEdit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleEditSubmit = this.handleEditSubmit.bind(this);
     }
 
     calculateVotes(objs) {
@@ -213,22 +221,94 @@ class ReplyItem extends React.Component {
         return {count: count, bool:bool};
     }
 
+    handleUpVote(event) {
+        event.preventDefault();
+        this.updateVote(1);
+    }
+
+    handleDownVote(event) {
+        event.preventDefault();
+        this.updateVote(-1);
+    }
+
+    updateVote(value) {
+        var objToBePushed = {'userId':firebase.auth().currentUser.uid, 'vote': value};
+        firebase.database().ref('discussions/' + this.props.discussionId + "/conversations/" + this.props.threadId + "/votes").push(objToBePushed);
+        this.setState({'votes': this.state.votes + value, 'voted':true});
+    }
+
+    handleDelete(event) {
+        event.preventDefault();
+        firebase.database().ref('discussions/' + this.props.discussionId + "/conversations/" + this.props.threadId).remove();
+    }
+
+    handleClickEdit(event) {
+        event.preventDefault();
+        this.setState({editMode:true});
+    }
+
+    handleEditSubmit(event) {
+        event.preventDefault();
+        var updatedContent = event.target.editContent.value;
+        if (updatedContent !== this.props.conversationDetails.content) {
+            var objectToBeUpdated = {'editTime': firebase.database.ServerValue.TIMESTAMP, 'content': updatedContent};
+            firebase.database().ref('discussions/' + this.props.discussionId + "/conversations/" + this.props.threadId).update(objectToBeUpdated)
+            .then(()=>{
+                this.setState({editMode:false});
+            });
+        }
+        
+
+    }
+
+    handleClose(event) {
+        event.preventDefault();
+        this.setState({editMode:false});
+    }
+
     render() {
+        var currentUser = firebase.auth().currentUser;
+        var editAndDeleteButtonShown = (currentUser !== null ? (currentUser.uid === this.props.conversationDetails.userId) : false);
+        var content = undefined;
+        if (this.state.editMode) {
+            content = (
+                        <form id="replyEdit" onSubmit={this.handleEditSubmit}>
+                            <textarea defaultValue={this.props.conversationDetails.content} name="editContent" type="text" className="form-control"></textarea>
+                            <Button type="submit">submit</Button>
+                            <Button onClick={this.handleClose}>Close</Button>
+                        </form>  
+                       );
+        } else {
+            content = <div className="reply-content"><p>{this.props.conversationDetails.content}</p></div>
+        }
+
         return(
             <li>
                 <Grid noSpacing>
                     <Cell col={1}>
                         <div className="votes-container">
-                            <div><IconButton name="arrow_drop_up" /></div>
+                            <div><IconButton name="arrow_drop_up" disabled={this.state.voted} onClick={this.handleUpVote}/></div>
                             <div className="vote-num">{this.state.votes}</div>
-                            <div><IconButton name="arrow_drop_down" /></div>
+                            <div><IconButton name="arrow_drop_down" disabled={this.state.voted} onClick={this.handleDownVote} /></div>
                         </div>
                     </Cell>
                     <Cell col={11}>
-                        <div className="reply-container">
-                            <div>{this.props.conversationDetails.username}</div>
-                            <div className="reply-content"><p>{this.props.conversationDetails.content}</p></div>
-                        </div>
+                        <Grid noSpacing>
+                            <Cell col={12}>
+                                <div>
+                                    <span>{this.props.conversationDetails.username}</span>
+                                    {editAndDeleteButtonShown && 
+                                        <div className="item-controls">
+                                            <Button onClick={this.handleClickEdit}>edit</Button>
+                                            <Button onClick={this.handleDelete}>delete</Button>
+                                        </div>
+                                    }
+                                </div>
+                            </Cell>
+                            <Cell col={9}>
+                                {content}
+                            </Cell>
+                        </Grid>
                     </Cell>
                     <Cell col={12}>
                         <div className="time-info"><span>posted{' '}<Time value={this.props.conversationDetails.createTime} relative/></span>
@@ -300,17 +380,15 @@ class CreatorItem extends React.Component {
 
     handleLike(event) {
         event.preventDefault();
-        console.log("clicked like!");
 
         firebase.database().ref('discussions/' + this.props.discussionId + "/likes").push(firebase.auth().currentUser.uid);
 
-        // update the front ui immediately even though
+        // update the front ui immediately even though it might not have been got to the server yet
         this.setState({likes:this.state.likes + 1, liked:true});
     }
 
     handleDislike(event) {
         event.preventDefault();
-        console.log("clicked dislike!");
 
         firebase.database().ref('discussions/' + this.props.discussionId + "/dislikes").push(firebase.auth().currentUser.uid);
 
@@ -325,7 +403,6 @@ class CreatorItem extends React.Component {
 
     handleEditSubmit(event) {
         event.preventDefault();
-        console.log(event.target.editContent.value);
         var updatedContent = event.target.editContent.value;
         if (updatedContent !== this.props.content) {
             var objToBeUpdated = {'content':updatedContent, 'editTime':firebase.database.ServerValue.TIMESTAMP};
@@ -356,7 +433,7 @@ class CreatorItem extends React.Component {
                         <form id="discussionEdit" onSubmit={this.handleEditSubmit}>
                             <textarea defaultValue={this.props.content} name="editContent" type="text" className="form-control"></textarea>
                             <Button type="submit">Edit</Button>
-                            <Button >Close</Button>
+                            <Button onClick={this.handleClose}>Close</Button>
                         </form>  
                        );
         } else {
@@ -368,7 +445,7 @@ class CreatorItem extends React.Component {
                 <div>
                     <span>{this.props.username}</span>
                     {editAndDeleteButtonShown && 
-                        <div className="discussion-owner-controls">
+                        <div className="item-controls">
                             <Button onClick={this.handleEditClick}>edit</Button>
                             <Button onClick={this.handleDelete}>delete</Button>
                         </div>
@@ -400,7 +477,8 @@ class ReplyArea extends React.Component {
 
     handleReply(event) {
         event.preventDefault();
-        var replyContent = this.state.replyContent;
+        // need to figure out how to encode line break;
+        var replyContent = event.target.replyArea.value;
         if (replyContent !== '') {
             var currentUser = firebase.auth().currentUser;
             var objToBePushed = {"username":currentUser.displayName,
@@ -418,7 +496,6 @@ class ReplyArea extends React.Component {
     }
 
     handleInputChange(event) {
-        console.log(event.target.value);
         this.setState({replyContent: event.target.value});
     }
 
@@ -426,7 +503,7 @@ class ReplyArea extends React.Component {
         return (
             <div>
                 <form id="replyForm" onSubmit={this.handleReply}>
-                    <textarea className="form-control" name="replyArea" onChange={this.handleInputChange} value={this.state.replyContent}></textarea>
+                    <textarea className="form-control" name="replyArea" onChange={this.handleInputChange} value={this.state.replyContent} rows="10"></textarea>
                     <Button>Reply</Button>
                 </form>
             </div>

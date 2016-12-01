@@ -41,6 +41,7 @@
 
 .time-info {
     float: right;
+    padding-right: 15px;
 }
 
 .likes {
@@ -78,7 +79,7 @@
   padding-right: 30%;
 }
 
-.discussion-owner-controls {
+.item-controls {
   float: right;
 }
 

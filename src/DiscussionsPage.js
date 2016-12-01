@@ -6,37 +6,37 @@ import firebase from 'firebase';
 import {hashHistory} from 'react-router';
 import Time from 'react-time';
 
-var data = [
-    {
-        "ABC":{"username": "u1",
-                "userId": 123456,
-                "title": "discussion1",
-                "createTime": "11/29/2016",
-                "editTime": "11/29/2016",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
-                "likes": 5,
-                "dislikes": 2,
-                "conversations": {
-                    "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
-                    "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
-                }
-              }             
-    },
-    {"DEF":{"username": "u2",
-                "userId": 654321,
-                "title": "discussion2",
-                "createTime": "11/27/2016",
-                "editTime": "11/28/2016",
-                "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
-                "likes": 3,
-                "dislikes": 2,
-                "conversations": {
-                    "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
-                    "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
-                }
-              }
-    }
-];
+// var data = [
+//     {
+//         "ABC":{"username": "u1",
+//                 "userId": 123456,
+//                 "title": "discussion1",
+//                 "createTime": "11/29/2016",
+//                 "editTime": "11/29/2016",
+//                 "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
+//                 "likes": 5,
+//                 "dislikes": 2,
+//                 "conversations": {
+//                     "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
+//                     "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
+//                 }
+//               }             
+//     },
+//     {"DEF":{"username": "u2",
+//                 "userId": 654321,
+//                 "title": "discussion2",
+//                 "createTime": "11/27/2016",
+//                 "editTime": "11/28/2016",
+//                 "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
+//                 "likes": 3,
+//                 "dislikes": 2,
+//                 "conversations": {
+//                     "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
+//                     "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
+//                 }
+//               }
+//     }
+// ];
 
 class DiscussionPage extends React.Component {
     constructor(props) {
@@ -89,10 +89,8 @@ class DiscussionPage extends React.Component {
 
     handleCreate(event) {
         event.preventDefault();
-        console.log("create!");
         var discussionsRef = firebase.database().ref('discussions');
         var currentUser = firebase.auth().currentUser;
-        console.log("currentUser is:" + currentUser.email);
         var objToBePushed={"username": currentUser.displayName,
                             "userId": currentUser.uid,
                             "title": this.state.title,
