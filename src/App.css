@@ -18,6 +18,156 @@
   font-size: large;
 }
 
+.discussion-details-body {
+  list-style-type: none;
+}
+
+
+.invalid .help-block {
+    color: red;
+}
+
+.invalid input {
+    background-color: #f2dede;
+}
+
+.dicussion-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.time-info {
+    float: right;
+    padding-right: 15px;
+    color: #999;
+}
+
+.likes {
+    margin-left: 10px;
+}
+
+.dislikes {
+    margin-left: 10px;
+}
+
+.edit-time {
+    margin-left: 10px;
+}
+
+.create-discussion {
+    float:right;
+}
+
+.discussion-page-header h1 {
+    display: inline;
+}
+
+.sign-out-button {
+    cursor: pointer;
+}
+
+.container {
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+#signInContainer {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+#signUpContainer {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.item-controls {
+  float: right;
+}
+
+.item-controls button {
+  font-size: 12px;
+}
+
+.votes-container {
+  height: 100%;
+  text-align: center;
+}
+
+.vote-num {
+  margin-top:-6px;
+  margin-bottom: -6px;
+}
+
+.reply-container {
+  padding-top: 6px;
+  text-align: left;
+  height: 150px;
+}
+
+.reply-content {
+  overflow: hidden;
+  white-space: normal;
+  clear: both;
+  text-overflow:ellipsis;
+}
+
+.thumb-up {
+  color: #337ab7;
+}
+
+.thumb-down {
+  color: rgb(255,64,129);
+}
+
+.thumb-down-container {
+  margin-left: 10px;
+}
+
+.content {
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.creator-item {
+  border-left-color: #f8f8f8;
+  border-left-style: solid;
+  border-left-width: 15px;
+}
+
+.creator-container {
+  padding-left: 20px;
+}
+
+.user-info {
+  display: inline;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.user-info .user-name {
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.list-group h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
