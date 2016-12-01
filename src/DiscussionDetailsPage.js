@@ -4,6 +4,7 @@ import {hashHistory} from 'react-router';
 import firebase from 'firebase';
 import Time from 'react-time';
 import 'bootstrap/dist/css/bootstrap.css';
+import noUserPic from './img/no-user-pic.png';
 
 const DELETE_DISCUSSION_THRESHOLD = 2;
 
@@ -13,6 +14,7 @@ class DiscussionDetailsPage extends React.Component {
 
         this.state={username:'',
                     userId:'',
+                    photoURL:'',
                     title:'',
                     content:'',
                     createTime:'',
@@ -28,11 +30,12 @@ class DiscussionDetailsPage extends React.Component {
         this.closeDeleteConfirmationModal = this.closeDeleteConfirmationModal.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
+
     componentDidMount() {
         /* Add a listener and callback for authentication events */
         this.unregister = firebase.auth().onAuthStateChanged(user => {
             if(user) {
-                console.log('Auth state changed: logged in as', user.email);
+                console.log('Auth state changed: logged in as' + user.email + ", " + user.photoURL);
                 this.detailRef = firebase.database().ref('discussions/' + this.props.params.discussionId);              
                 this.detailRef.on('value', (snapshot) => {
                     var obj = {};
@@ -142,11 +145,12 @@ class DiscussionDetailsPage extends React.Component {
         return (
             <Grid>
                 <Cell col={12}>
-                    <header>{this.state.title}</header>
+                    <h1>{this.state.title}</h1>
                 </Cell>
                 <Cell col={12}>
                     <ul className="discussion-details-body">
                         <CreatorItem username={this.state.username}
+                                     photoURL={this.state.photoURL}
                                      userId={this.state.userId}
                                      content={this.state.content}
                                      createTime={this.state.createTime}
@@ -274,12 +278,12 @@ class ReplyItem extends React.Component {
             content = (
                         <form id="replyEdit" onSubmit={this.handleEditSubmit}>
                             <textarea defaultValue={this.props.conversationDetails.content} name="editContent" type="text" className="form-control"></textarea>
-                            <Button type="submit">submit</Button>
+                            <Button type="submit">Save</Button>
                             <Button onClick={this.handleClose}>Close</Button>
                         </form>  
                        );
         } else {
-            content = <div className="reply-content"><p>{this.props.conversationDetails.content}</p></div>
+            content = <div className="content"><p>{this.props.conversationDetails.content}</p></div>
         }
 
         return(
@@ -295,8 +299,8 @@ class ReplyItem extends React.Component {
                     <Cell col={11}>
                         <Grid noSpacing>
                             <Cell col={12}>
-                                <div>
-                                    <span>{this.props.conversationDetails.username}</span>
+                                <div className="user-info-container">
+                                    <UserInfo photoURL={this.props.conversationDetails.photoURL} username={this.props.conversationDetails.username}/>
                                     {editAndDeleteButtonShown && 
                                         <div className="item-controls">
                                             <Button onClick={this.handleClickEdit}>edit</Button>
@@ -366,6 +370,7 @@ class CreatorItem extends React.Component {
             if (key !== 'likes' && key !== 'dislikes' && this.props[key] !== nextProps[key]) {
                 obj = {};
                 obj[key] = nextProps[key];
+                if (key === 'content') console.log(obj);
                 this.setState(obj);
             } else if (key === 'likes') {
                 obj = this.calculateLikesAndDislikes(nextProps[key]);
@@ -428,36 +433,37 @@ class CreatorItem extends React.Component {
         var editAndDeleteButtonShown = (currentUser !== null ? (currentUser.uid === this.props.userId) : false);
         var content = undefined;
         if (this.state.editMode) {
-            // can probably add a spinner to indicating it is updating...
             content = (
                         <form id="discussionEdit" onSubmit={this.handleEditSubmit}>
                             <textarea defaultValue={this.props.content} name="editContent" type="text" className="form-control"></textarea>
-                            <Button type="submit">Edit</Button>
+                            <Button type="submit">Save</Button>
                             <Button onClick={this.handleClose}>Close</Button>
                         </form>  
                        );
         } else {
-            content = this.props.content;
+            content = <div className="content">{this.props.content}</div>;
         }
 
         return (
-            <li>
-                <div>
-                    <span>{this.props.username}</span>
-                    {editAndDeleteButtonShown && 
-                        <div className="item-controls">
-                            <Button onClick={this.handleEditClick}>edit</Button>
-                            <Button onClick={this.handleDelete}>delete</Button>
+            <li className="creator-item">
+                <div className="creator-container">
+                    <div className="user-info-container">
+                        <UserInfo photoURL={this.props.photoURL} username={this.props.username}/>
+                        {editAndDeleteButtonShown && 
+                            <div className="item-controls">
+                                <Button onClick={this.handleEditClick}>edit</Button>
+                                <Button onClick={this.handleDelete}>delete</Button>
+                            </div>
+                        }
+                    </div>
+                    <div>{content}</div>
+                    <div>
+                        <span className="thumb-up"><IconButton name="thumb_up" onClick={this.handleLike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.likes}</span>{' '}
+                        <span className="thumb-down thumb-down-container"><IconButton name="thumb_down" onClick={this.handleDislike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.dislikes}</span>
+                        <div className="time-info"><span>created{' '}<Time value={this.props.createTime} relative/></span>
+                        {this.props.createTime !== this.props.editTime
+                            && <span className="edit-time">edited{' '}<Time value={this.props.editTime} relative/></span>}
                         </div>
-                    }
-                </div>
-                <div>{content}</div>
-                <div>
-                    <span><IconButton name="thumb_up" onClick={this.handleLike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.likes}</span>{' '}
-                    <span><IconButton name="thumb_down" onClick={this.handleDislike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.dislikes}</span>
-                    <div className="time-info"><span>created{' '}<Time value={this.props.createTime} relative/></span>
-                    {this.props.createTime !== this.props.editTime
-                        && <span className="edit-time">edited{' '}<Time value={this.props.editTime} relative/></span>}
                     </div>
                 </div>
                 <hr />
@@ -482,6 +488,7 @@ class ReplyArea extends React.Component {
         if (replyContent !== '') {
             var currentUser = firebase.auth().currentUser;
             var objToBePushed = {"username":currentUser.displayName,
+                                 "photoURL": currentUser.photoURL,
                                  "userId":currentUser.uid,
                                  "createTime": firebase.database.ServerValue.TIMESTAMP,
                                  "editTime": firebase.database.ServerValue.TIMESTAMP,
@@ -506,6 +513,18 @@ class ReplyArea extends React.Component {
                     <textarea className="form-control" name="replyArea" onChange={this.handleInputChange} value={this.state.replyContent} rows="10"></textarea>
                     <Button>Reply</Button>
                 </form>
+            </div>
+        );
+    }
+}
+
+class UserInfo extends React.Component {
+    render() {
+        var imgStyle={'borderColor': this.props.photoURL};
+        return(
+            <div className="user-info">
+                <img  src={noUserPic} style={imgStyle} alt="user picture"/>
+                <span className="user-name">{this.props.username}</span>
             </div>
         );
     }

@@ -42,6 +42,7 @@
 .time-info {
     float: right;
     padding-right: 15px;
+    color: #999;
 }
 
 .likes {
@@ -83,6 +84,10 @@
   float: right;
 }
 
+.item-controls button {
+  font-size: 12px;
+}
+
 .votes-container {
   height: 100%;
   text-align: center;
@@ -105,6 +110,53 @@
   clear: both;
   text-overflow:ellipsis;
 }
+
+.thumb-up {
+  color: #337ab7;
+}
+
+.thumb-down {
+  color: rgb(255,64,129);
+}
+
+.thumb-down-container {
+  margin-left: 10px;
+}
+
+.content {
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.creator-item {
+  border-left-color: #f8f8f8;
+  border-left-style: solid;
+  border-left-width: 15px;
+}
+
+.creator-container {
+  padding-left: 20px;
+}
+
+.user-info {
+  display: inline;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.user-info .user-name {
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

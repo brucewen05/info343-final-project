@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Grid, Cell, Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner} from 'react-mdl';
+import {Grid, Cell, Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner, Icon} from 'react-mdl';
 import 'bootstrap/dist/css/bootstrap.css';
 import firebase from 'firebase';
 import {hashHistory} from 'react-router';
@@ -93,6 +93,7 @@ class DiscussionPage extends React.Component {
         var currentUser = firebase.auth().currentUser;
         var objToBePushed={"username": currentUser.displayName,
                             "userId": currentUser.uid,
+                            "photoURL": currentUser.photoURL,
                             "title": this.state.title,
                             "createTime": firebase.database.ServerValue.TIMESTAMP,
                             "editTime": firebase.database.ServerValue.TIMESTAMP,
@@ -183,8 +184,14 @@ class DiscussionItem extends React.Component {
                 <div className="list-group-item-text">
                     <span>Read more</span>
                     <div></div>
-                    <span className="likes"><i className="glyphicon glyphicon-thumbs-up" />{' '}{likes}</span>
-                    <span className="dislikes"><i className="glyphicon glyphicon-thumbs-down" />{' '}{dislikes}</span>
+                    <span>
+                        <span><Icon name="thumb_up" /></span>{' '}
+                        <span className="thumb-up">{' '}{likes}</span>
+                    </span>
+                    <span className="thumb-down-container">
+                        <span><Icon name="thumb_down" /></span>{' '}
+                        <span className="thumb-down" >{' '}{dislikes}</span>
+                    </span>
                     <div className="time-info">
                         <span>created{' '}<Time value={this.props.discussionObj.createTime} relative/></span>
                         {this.props.discussionObj.createTime !== this.props.discussionObj.editTime

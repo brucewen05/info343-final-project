@@ -18,11 +18,25 @@ class SignUpForm extends React.Component {
 
     this.updateState = this.updateState.bind(this); //bind for scope
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.getRandomColor = this.getRandomColor.bind(this);
   }
 
   //callback for updating the state with child information
   updateState(stateChange){
     this.setState(stateChange);
+  }
+
+  // this function is copied from stackoverflow
+  // http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
+  // since we are not using the photoURL field, just use it as
+  // a color associated with this user
+  getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
   }
 
   //callback for the submit button
@@ -35,8 +49,10 @@ class SignUpForm extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(this.state.email.value, this.state.password.value)
       .then((firebaseUser) => {
         //include information (for app-level content)
+        var color = this.getRandomColor();
         var profilePromise = firebaseUser.updateProfile({
           displayName: this.state.name.value,
+          photoURL: color
         }); //return promise for chaining
         return profilePromise;
       })
