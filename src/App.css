@@ -31,7 +31,7 @@
     background-color: #f2dede;
 }
 
-.dicussion-content {
+.dicussion-content, .event-description {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -70,17 +70,12 @@
 }
 
 .container {
-  text-align: center;
   padding-left: 10%;
   padding-right: 10%;
 }
 
-#signInContainer {
-  padding-left: 30%;
-  padding-right: 30%;
-}
-
-#signUpContainer {
+#signInContainer, #signUpContainer {
+  text-align: center;
   padding-left: 30%;
   padding-right: 30%;
 }
