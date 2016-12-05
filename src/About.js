@@ -56,6 +56,7 @@ class About extends React.Component {
         <h3>Amy</h3><p>is a junior at the University of Washington majoring in Informatics. She is from Potomac, Maryland.</p>
         </div>
         </div>
+        <h2 id="about-h2"> Resources </h2>
       </div>
     )
   }
