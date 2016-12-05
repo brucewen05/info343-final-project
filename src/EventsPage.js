@@ -8,14 +8,21 @@ import moment from 'moment';
 class EventsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {events: []};
+        this.state = { events: [] };
     }
     componentDidMount() {
         this.unregister = firebase.auth().onAuthStateChanged(user => {
-            if(!user) {
+            if (!user) {
                 hashHistory.push("/login");
             }
         });
+    }
+
+    componentWillUnmount() {
+        //unregister user and message listeners
+        if (this.unregister) {
+            this.unregister();
+        }
     }
 
     render() {
@@ -23,10 +30,8 @@ class EventsPage extends React.Component {
             <div>
                 <h1>Events</h1>
                 <Grid>
-
                     <NewEvent />
                     <EventsList />
-
                 </Grid>
             </div>
         );
@@ -115,8 +120,12 @@ class EventsList extends React.Component {
 
     componentWillUnmount() {
         //unregister user and message listeners
-        firebase.database().ref('users').off();
-        firebase.database.ref('events').off
+        if (this.usersRef) {
+            this.usersRef.off();
+        }
+        if (this.eventsRef) {
+            this.eventsRef.off();
+        }
     }
 
     render() {
