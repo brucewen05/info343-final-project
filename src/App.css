@@ -57,12 +57,25 @@
     margin-left: 10px;
 }
 
-.create-discussion {
+.create-discussion, .create-event {
     float:right;
 }
 
-.discussion-page-header h1 {
+.discussion-page-header h1, .event-page-header h1 {
     display: inline;
+}
+
+.banner {
+  width: 100%;
+}
+
+.page-desc-heading {
+  text-align: center;
+}
+
+#home-content .material-icons {
+  font-size: 50px;
+  text-align: center;
 }
 
 .sign-out-button {
