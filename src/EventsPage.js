@@ -1,15 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import { Grid, Cell, Header, Button } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
 
 
 class EventsPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {events: []};
+    }
+    componentDidMount() {
+        this.unregister = firebase.auth().onAuthStateChanged(user => {
+            if(!user) {
+                hashHistory.push("/login");
+            }
+        });
+    }
+
     render() {
         return (
             <div>
-                <Header title="Events" />
+                <h1>Events</h1>
                 <Grid>
 
                     <NewEvent />
@@ -130,7 +142,7 @@ class EventItem extends React.Component {
                 <p>Time: {this.props.event.time}</p>
                 <p>Location: {this.props.event.location}</p>
                 <hr />
-                <p className="list-group-item-text">
+                <p className="list-group-item-text event-description">
                     {this.props.event.description}
                 </p>
                 <br />
