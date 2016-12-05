@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import Time from 'react-time';
 import 'bootstrap/dist/css/bootstrap.css';
 import noUserPic from './img/no-user-pic.png';
-import EditableDiv from 'react-wysiwyg-editor';
 
 const DELETE_DISCUSSION_THRESHOLD = 2;
 

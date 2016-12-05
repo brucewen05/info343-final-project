@@ -215,6 +215,18 @@
   margin-left: 10%;
 }
 
+.main-page-discussion h1 {
+  font-size: 14px;
+}
+
+.main-page-discussion ul {
+  list-style: none;
+}
+
+.main-page-discussion .main-page-post-time {
+  color: #999;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
