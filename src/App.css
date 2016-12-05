@@ -119,9 +119,13 @@
 
 .reply-content {
   overflow: hidden;
-  white-space: normal;
+  white-space: pre-line;
   clear: both;
   text-overflow:ellipsis;
+}
+
+.content {
+  white-space: pre-line;
 }
 
 .thumb-up {

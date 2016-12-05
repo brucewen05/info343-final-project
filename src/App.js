@@ -61,7 +61,7 @@ class App extends Component {
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/FAQs">FAQs</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleSignOut}><IconButton onClick={this.handleSignOut}><ArrowIcon/></IconButton>Sign out</MenuItem>
+            <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon onClick={this.handleSignOut}/>{' '}Sign out</MenuItem>
           </DrawerMenu>
         </AppBar>
       </MuiThemeProvider>
