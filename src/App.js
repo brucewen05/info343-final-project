@@ -26,7 +26,6 @@ class App extends Component {
     this.state = {open: false};
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSignOut = this.handleSignOut(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
@@ -62,13 +61,13 @@ class App extends Component {
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/FAQs">FAQs</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleSignOut}><IconButton><ArrowIcon/></IconButton>Sign out</MenuItem>
+            <MenuItem onTouchTap={this.handleSignOut}><IconButton onClick={this.handleSignOut}><ArrowIcon/></IconButton>Sign out</MenuItem>
           </DrawerMenu>
         </AppBar>
       </MuiThemeProvider>
-      <Content>
+      <div className="container">
         {this.props.children}
-      </Content>
+      </div>
     </div>
     );
   }

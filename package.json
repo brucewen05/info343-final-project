@@ -6,6 +6,7 @@
     "react-scripts": "0.7.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.18.0",
     "bootstrap": "^3.3.7",
     "firebase": "^3.6.1",
     "material-ui": "^0.16.4",
