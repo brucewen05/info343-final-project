@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 import './App.css';
 import firebase from 'firebase';
 import AppBar from 'material-ui/AppBar';
@@ -37,9 +37,11 @@ class App extends Component {
   }
 
   handleSignOut() {
+    this.setState({open: false});
     if (firebase.auth().currentUser) {
       firebase.auth().signOut();
     }
+    hashHistory.push("/login");
   }
 
   render() {
@@ -60,7 +62,7 @@ class App extends Component {
             <MenuItem onTouchTap={this.handleClose} ><Link to="/news">News</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon onClick={this.handleSignOut}/>{' '}Sign out</MenuItem>
+            <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon />{' '}Sign out</MenuItem>
           </DrawerMenu>
         </AppBar>
       </MuiThemeProvider>

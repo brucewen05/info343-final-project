@@ -28,7 +28,7 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={SignInPage} />
+      <IndexRoute component={MainPage} />
       <Route path="join" component={SignUpPage} />
       <Route path="login" component={SignInPage} />
       <Route path="main" component={MainPage} />

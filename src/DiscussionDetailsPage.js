@@ -505,7 +505,7 @@ class ReplyArea extends React.Component {
             <div>
                 <form id="replyForm" onSubmit={this.handleReply}>
                     <textarea className="form-control" name="replyArea" onChange={this.handleInputChange} value={this.state.replyContent} rows="10"></textarea>
-                    <Button>Reply</Button>
+                    <Button colored>Reply</Button>
                 </form>
             </div>
         );

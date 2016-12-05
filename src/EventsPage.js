@@ -77,7 +77,7 @@ class NewEvent extends React.Component {
     }
 
     render() {
-        var postEnabled = (this.state.title != '' && this.state.date != '' && this.state.time != '' && this.state.location != '' && this.state.description != '');
+        var postEnabled = (this.state.title !== '' && this.state.date !== '' && this.state.time !== '' && this.state.location !== '' && this.state.description !== '');
 
         return (
             <Cell col={12} className="list-group-item">
@@ -137,6 +137,8 @@ class EventsList extends React.Component {
             var eventDate = Date.parse(event.date);
             if (eventDate > yesterday) {
                 return <EventItem event={event} eventId={event.key} key={event.key} />
+            } else {
+                return null;
             }
         });
 

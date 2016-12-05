@@ -1,10 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Button, Spinner, Dialog, DialogContent, DialogActions} from 'react-mdl';
-import {Link} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 import {EmailInput, RequiredInput} from './SignUpPage.js';
 import firebase from 'firebase';
-import {hashHistory} from 'react-router';
 
 class SignInForm extends React.Component {
   constructor(props){
@@ -29,7 +28,6 @@ class SignInForm extends React.Component {
   //callback for the submit button
   handleSignIn(event) {
     event.preventDefault();
-    console.log("submit!");
 
     this.setState({showSpinner:true});
     /* Sign in the user */

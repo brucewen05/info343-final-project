@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Cell } from 'react-mdl';
-import { Link, hashHistory } from 'react-router';
+import { Link } from 'react-router';
 import firebase from 'firebase';
 import homebanner from './img/homebanner.jpg';
 import Time from 'react-time';
@@ -16,20 +16,20 @@ class MainPage extends React.Component {
         this.unregister = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 console.log('Auth state changed: logged in as', user.email);
-                this.discussionRef = firebase.database().ref('discussions');
-                this.discussionRef.on('value', (snapshot)=>{
-                    var discussionsArray = [];
-                    snapshot.forEach((child) => {
-                        var obj = {'key': child.key, 'value': child.val()};
-                        discussionsArray.push(obj);
-                    });
-                    this.setState({'discussions': discussionsArray});
-                });
             }
             else {
                 console.log('Auth state changed: logged out');
-                hashHistory.push("/login");
             }
+        });
+
+        this.discussionRef = firebase.database().ref('discussions');
+        this.discussionRef.on('value', (snapshot)=>{
+            var discussionsArray = [];
+            snapshot.forEach((child) => {
+                var obj = {'key': child.key, 'value': child.val()};
+                discussionsArray.push(obj);
+            });
+            this.setState({'discussions': discussionsArray});
         });
     }
 
@@ -78,10 +78,10 @@ class MainPage extends React.Component {
                     </Link>
                 </Cell>
                 <Cell col={4}>
-                    <Link to="/FAQs" className="list-group-item">
+                    <Link to="/news" className="list-group-item">
                         <div className="page-desc-heading">
-                            <i className="material-icons">live_help</i>
-                            <h2>FAQ</h2>
+                            <i className="material-icons">picture_in_picture</i>
+                            <h2>News</h2>
                         </div>
                         <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
                     </Link>
