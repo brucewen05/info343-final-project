@@ -77,17 +77,19 @@ class NewEvent extends React.Component {
     }
 
     render() {
+        var postEnabled = (this.state.title != '' && this.state.date != '' && this.state.time != '' && this.state.location != '' && this.state.description != '');
+
         return (
             <Cell col={12} className="list-group-item">
                 <h2>Add a new event</h2>
                 <form>
                     <input type="text" className="form-control" value={this.state.title} onChange={(event) => this.handleInputChange(event, "title")} placeholder="Title" /> <br />
-                    <input type="text" className="form-control" value={this.state.date} onChange={(event) => this.handleInputChange(event, "date")} placeholder="Date" /> <br />
+                    <input type="date" className="form-control" value={this.state.date} onChange={(event) => this.handleInputChange(event, "date")} placeholder="Date" /> <br />
                     <input type="text" className="form-control" value={this.state.time} onChange={(event) => this.handleInputChange(event, "time")} placeholder="Time" /> <br />
                     <input type="text" className="form-control" value={this.state.location} onChange={(event) => this.handleInputChange(event, "location")} placeholder="Location" /> <br />
                     <textarea type="text" className="form-control" value={this.state.description} onChange={(event) => this.handleInputChange(event, "description")} placeholder="Event description" /> <br />
                 </form>
-                <Button type="button" onClick={(event) => this.handlePostEvent(event)} aria-label="post event" colored raised>Post Event</Button>
+                <Button type="button" onClick={(event) => this.handlePostEvent(event)} aria-label="post event" colored raised disabled={!postEnabled}>Post Event</Button>
             </Cell>
         );
     }
@@ -100,7 +102,7 @@ class EventsList extends React.Component {
     }
 
     componentWillMount() {
-        var eventsRef = firebase.database().ref('events').orderByChild('time');
+        var eventsRef = firebase.database().ref('events').orderByChild('date');
         eventsRef.on('value', (snapshot) => {
             var eventsArray = [];
             snapshot.forEach(function (child) {
@@ -129,12 +131,18 @@ class EventsList extends React.Component {
     }
 
     render() {
+        var yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+        yesterday = yesterday.getTime();
         var eventItems = this.state.events.map((event) => {
-            return <EventItem event={event} eventId={event.key} key={event.key} />
-        })
+            var eventDate = Date.parse(event.date);
+            if (eventDate > yesterday) {
+                return <EventItem event={event} eventId={event.key} key={event.key} />
+            }
+        });
 
         return (
             <Cell col={12}>
+                <h2>Upcoming Events</h2>
                 {eventItems}
             </Cell>
         );
