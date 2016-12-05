@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import { Grid, Cell } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
@@ -30,11 +30,17 @@ class EventDetailsPage extends React.Component {
                     });
                     this.setState(eventObj);
                 });
-            };
+            }
+            else {
+                hashHistory.push("/login");
+            }
         });
     }
 
     componentWillUnmount() {
+        if (this.eventDetailsRef) {
+            this.eventDetailsRef.off();
+        }
         if (this.unregister) {
             this.unregister();
         }
