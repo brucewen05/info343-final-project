@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
 import $ from 'jquery';
+import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 
 class News extends React.Component {
       constructor(props) {
@@ -13,7 +16,8 @@ class News extends React.Component {
         var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
         var newUrl = url + '?' + $.param({
           'api-key': "57dc3b4f1c5a432fa6979797629a230f",
-          'q': "immigration"
+          'q': "immigration",
+          'sort': "newest"
         });
         fetch(newUrl)
         .then(function(response) {
@@ -57,13 +61,8 @@ class Stories extends React.Component {
        return <StoryCard story={story} key={story.web_url}/>
      });
     return (
-      <div>
-      <div className="mdl-layout__header-row">
-          <div className="mdl-layout-spacer"></div>
-      </div>
       <div className="container">
         {StoryCardArray}
-      </div>
       </div>
     );
   }
@@ -74,28 +73,21 @@ class StoryCard extends React.Component {
   render() {
     //  var news = this.props.stories.docs;
     //  console.log(news);
+
     return (
-      <div>
-      <ul className="demo-list-item mdl-list">
-          <li className="mdl-list__item">
-              <span className="mdl-list__item-primary-content">
-            <div className="card-wide mdl-card mdl-shadow--2dp">
-              <div className="mdl-card__title">
-                <h2 className="mdl-card__title-text">{this.props.story.headline.main}</h2>
-              </div>
-              <div className="mdl-card__supporting-text">
-              {this.props.story.pub_date}
-              </div>
-              <div className="mdl-card__actions mdl-card--border">
-              <div className="mdl-card__supporting-text">
-              {this.props.story.snippet}
-              </div>
-              </div>
-            </div>
-          </span>
-        </li>
-      </ul>
-      </div>
+      <MuiThemeProvider>
+      <Card>
+        <CardTitle title={this.props.story.headline.main} subtitle={this.props.story.pub_date} />
+        <CardText>
+          {this.props.story.snippet}
+        </CardText>
+        <CardActions>
+        <a href={this.props.story.web_url}>
+          <FlatButton label="Learn More" />
+        </a>
+        </CardActions>
+      </Card>
+      </MuiThemeProvider>
     );
   }
 }
