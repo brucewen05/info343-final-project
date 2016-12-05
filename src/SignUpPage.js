@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Button, Header, Grid, Cell, Dialog, DialogActions, DialogContent, Spinner} from 'react-mdl';
+import {Button, Dialog, DialogActions, DialogContent, Spinner} from 'react-mdl';
 import {Link, hashHistory} from 'react-router';
 import firebase from 'firebase';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Button, Header, Grid, Cell, Spinner, Dialog, DialogContent, DialogActions} from 'react-mdl';
+import {Button, Spinner, Dialog, DialogContent, DialogActions} from 'react-mdl';
 import {Link} from 'react-router';
 import {EmailInput, RequiredInput} from './SignUpPage.js';
 import firebase from 'firebase';

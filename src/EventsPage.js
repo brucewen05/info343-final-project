@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, hashHistory } from 'react-router';
-import { Grid, Cell, Header, Button } from 'react-mdl';
+import { Grid, Cell, Button } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
 
