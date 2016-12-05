@@ -109,6 +109,9 @@
 .vote-num {
   margin-top:-6px;
   margin-bottom: -6px;
+  width: auto;
+  text-align: center;
+  min-width: 22px;
 }
 
 .reply-container {
@@ -190,8 +193,6 @@
 }
 
 .creator {
-  display: inline;
-  float: left;
   max-width: 200px;
   margin: 2em;
   text-align: center;
@@ -203,8 +204,8 @@
 }
 
 .creator-img {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   margin: 2em;
   border-radius: 50%;
   margin-bottom: 0;

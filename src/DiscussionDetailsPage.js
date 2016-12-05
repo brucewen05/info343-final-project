@@ -143,28 +143,29 @@ class DiscussionDetailsPage extends React.Component {
         });
 
         return (
-            <Grid>
-                <Cell col={12}>
+            <div className="container">
+                <div className="row">
                     <h1>{this.state.title}</h1>
-                </Cell>
-                <Cell col={12}>
-                    <ul className="discussion-details-body">
-                        <CreatorItem username={this.state.username}
-                                     photoURL={this.state.photoURL}
-                                     userId={this.state.userId}
-                                     content={this.state.content}
-                                     createTime={this.state.createTime}
-                                     editTime={this.state.editTime}
-                                     discussionId={this.props.params.discussionId}
-                                     likes={this.state.likes}
-                                     dislikes={this.state.dislikes}
-                                     deleteCallBack={this.openDeleteConfirmationModal} />
-                        {replies}
-                    </ul>
-                </Cell>
-                <Cell col={10} offset={1}>
-                    <ReplyArea discussionId={this.props.params.discussionId} />
-                </Cell>
+                    <div className="col-xs-12">
+                        <ul className="discussion-details-body">
+                            <CreatorItem username={this.state.username}
+                                        photoURL={this.state.photoURL}
+                                        userId={this.state.userId}
+                                        content={this.state.content}
+                                        createTime={this.state.createTime}
+                                        editTime={this.state.editTime}
+                                        discussionId={this.props.params.discussionId}
+                                        likes={this.state.likes}
+                                        dislikes={this.state.dislikes}
+                                        deleteCallBack={this.openDeleteConfirmationModal} />
+                            {replies}
+                        </ul>
+                    </div>
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <ReplyArea discussionId={this.props.params.discussionId} />
+                    </div>
+                </div>
+                
                 <Dialog open={this.state.tooManyDislikesModalOpen} >
                     <DialogContent>
                         this discussion got too many dislikes and will be deleted now...
@@ -183,7 +184,7 @@ class DiscussionDetailsPage extends React.Component {
                     </DialogActions>
                 </Dialog>
 
-            </Grid>
+            </div>
         );
     }
 }
@@ -287,40 +288,34 @@ class ReplyItem extends React.Component {
         }
 
         return(
-            <li>
-                <Grid noSpacing>
-                    <Cell col={1}>
-                        <div className="votes-container">
-                            <div><IconButton name="arrow_drop_up" disabled={this.state.voted} onClick={this.handleUpVote}/></div>
-                            <div className="vote-num">{this.state.votes}</div>
-                            <div><IconButton name="arrow_drop_down" disabled={this.state.voted} onClick={this.handleDownVote} /></div>
-                        </div>
-                    </Cell>
-                    <Cell col={11}>
-                        <Grid noSpacing>
-                            <Cell col={12}>
-                                <div className="user-info-container">
-                                    <UserInfo photoURL={this.props.conversationDetails.photoURL} username={this.props.conversationDetails.username}/>
-                                    {editAndDeleteButtonShown && 
-                                        <div className="item-controls">
-                                            <Button onClick={this.handleClickEdit}>edit</Button>
-                                            <Button onClick={this.handleDelete}>delete</Button>
-                                        </div>
-                                    }
+            <li className="row">                    
+                <div className="votes-container col-xs-1">
+                    <div><IconButton name="arrow_drop_up" disabled={this.state.voted} onClick={this.handleUpVote}/></div>
+                    <div className="vote-num">{this.state.votes}</div>
+                    <div><IconButton name="arrow_drop_down" disabled={this.state.voted} onClick={this.handleDownVote} /></div>
+                </div>
+                <div className="col-xs-11 row">
+                    <div className="col-xs-12">
+                        <div className="user-info-container">
+                            <UserInfo photoURL={this.props.conversationDetails.photoURL} username={this.props.conversationDetails.username}/>
+                            {editAndDeleteButtonShown && 
+                                <div className="item-controls">
+                                    <Button onClick={this.handleClickEdit}>edit</Button>
+                                    <Button onClick={this.handleDelete}>delete</Button>
                                 </div>
-                            </Cell>
-                            <Cell col={9}>
-                                {content}
-                            </Cell>
-                        </Grid>
-                    </Cell>
-                    <Cell col={12}>
-                        <div className="time-info"><span>posted{' '}<Time value={this.props.conversationDetails.createTime} relative/></span>
-                            {this.props.conversationDetails.createTime !== this.props.conversationDetails.editTime
-                                && <span className="edit-time">edited{' '}<Time value={this.props.conversationDetails.editTime} relative/></span>}
+                            }
                         </div>
-                    </Cell>
-                </Grid>
+                    </div>
+                    <div className="col-xs-9">
+                        {content}
+                    </div>
+                </div>
+                <div className="col-xs-12">
+                    <div className="time-info"><span>posted{' '}<Time value={this.props.conversationDetails.createTime} relative/></span>
+                        {this.props.conversationDetails.createTime !== this.props.conversationDetails.editTime
+                            && <span className="edit-time">edited{' '}<Time value={this.props.conversationDetails.editTime} relative/></span>}
+                    </div>
+                </div>
                 <hr />
             </li>
         );
@@ -370,7 +365,6 @@ class CreatorItem extends React.Component {
             if (key !== 'likes' && key !== 'dislikes' && this.props[key] !== nextProps[key]) {
                 obj = {};
                 obj[key] = nextProps[key];
-                if (key === 'content') console.log(obj);
                 this.setState(obj);
             } else if (key === 'likes') {
                 obj = this.calculateLikesAndDislikes(nextProps[key]);
