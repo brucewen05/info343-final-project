@@ -15,6 +15,7 @@ import FAQsPage from './FAQsPage.js';
 import FAQDetailsPage from './FAQDetailsPage.js';
 import EventsPage from './EventsPage.js';
 import EventDetailsPage from './EventDetailsPage.js';
+import About from './About.js';
 
 
 var config = {
@@ -39,6 +40,7 @@ ReactDOM.render(
       <Route path="FAQ/:FAQId" component={FAQDetailsPage} />
       <Route path="events" component={EventsPage} />
       <Route path="event/:eventId" component={EventDetailsPage} />
+      <Route path="about" component={About}/>
     </Route>
   </Router>,
   document.getElementById('root')
