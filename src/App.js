@@ -59,6 +59,7 @@ class App extends Component {
             onRequestChange={(open) => {this.setState({open})} } >
             <MenuItem onTouchTap={this.handleClose} ><Link to="/main">Homepage</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/about">About</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/news">News</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/FAQs">FAQs</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
