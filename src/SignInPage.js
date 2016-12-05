@@ -10,8 +10,8 @@ class SignInForm extends React.Component {
   constructor(props){
     super(props);
     this.state = { //track values and overall validity of each field
-      email:{value:'',valid:false},
-      password:{value:'',valid:false},
+      email:{value:null,valid:false},
+      password:{value:null,valid:false},
       howSpinner:false,
       errorMessage: ''
     };

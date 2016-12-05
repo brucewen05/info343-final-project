@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Cell, IconButton, Dialog, DialogContent, DialogActions, Button} from 'react-mdl';
+import {IconButton, Dialog, DialogContent, DialogActions, Button} from 'react-mdl';
 import {hashHistory} from 'react-router';
 import firebase from 'firebase';
 import Time from 'react-time';

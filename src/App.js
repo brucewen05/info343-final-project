@@ -38,7 +38,6 @@ class App extends Component {
 
   handleSignOut() {
     if (firebase.auth().currentUser) {
-      console.log("about to sign out");
       firebase.auth().signOut();
     }
   }
@@ -60,7 +59,6 @@ class App extends Component {
             <MenuItem onTouchTap={this.handleClose} ><Link to="/about">About</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/news">News</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/FAQs">FAQs</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
             <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon onClick={this.handleSignOut}/>{' '}Sign out</MenuItem>
           </DrawerMenu>

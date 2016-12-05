@@ -8,9 +8,9 @@ class SignUpForm extends React.Component {
   constructor(props){
     super(props);
     this.state = { //track values and overall validity of each field
-      email:{value:'',valid:false},
-      name:{value:'',valid:false},
-      password:{value:'',valid:false},
+      email:{value:null,valid:false},
+      name:{value:null,valid:false},
+      password:{value:null,valid:false},
       passwordConf:{value:'',valid:false},
       showSpinner:false,
       errorMessage: ''
@@ -42,7 +42,6 @@ class SignUpForm extends React.Component {
   //callback for the submit button
   handleSignUp(event) {
     event.preventDefault();
-    console.log("submit!");
     this.setState({showSpinner:true});
 
     /* Create a new user and save their information */
@@ -123,6 +122,10 @@ class SignUpForm extends React.Component {
  */
 class EmailInput extends React.Component {
   validate(currentValue){
+    if (currentValue === null) {
+      return {isValid:true};
+    }
+
     if(currentValue === ''){ //check presence
       return {missing: true, isValid: false}
     }
@@ -156,12 +159,12 @@ class EmailInput extends React.Component {
     var errors = this.validate(this.props.value); //need to validate again, but at least isolated
     var inputStyle = 'form-group';
     if(!errors.isValid) inputStyle += ' invalid'; //add styling rule
-
+    var value = this.props.value ? this.props.value : '';
     return (
       <div className={inputStyle}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" className="form-control" placeholder="email address"
-                value={this.props.value}
+                value={value}
                 onChange={(e) => this.handleChange(e)}
         />
         {errors.missing &&
@@ -181,6 +184,10 @@ class EmailInput extends React.Component {
  */
 class RequiredInput extends React.Component {
   validate(currentValue){
+    if (currentValue === null) {
+      return {isValid:true};
+    }
+
     if(currentValue === ''){ //check presence
       return {required: true, isValid: false};
     }
@@ -206,11 +213,12 @@ class RequiredInput extends React.Component {
     var inputStyle = 'form-group';
     if(!errors.isValid) inputStyle += ' invalid';
 
+    var value = this.props.value ? this.props.value : '';
     return (
       <div className={inputStyle}>
         <label htmlFor={this.props.field}>{this.props.label}</label>
-        <input type={this.props.type} id={this.props.id} name={this.props.field}className="form-control" placeholder={this.props.placeholder}
-                value={this.props.value}
+        <input type={this.props.type} id={this.props.id} name={this.props.field} className="form-control" placeholder={this.props.placeholder}
+                value={value}
                 onChange={(e) => this.handleChange(e)}
         />
         {!errors.isValid &&
@@ -227,7 +235,7 @@ class RequiredInput extends React.Component {
  */
 class PasswordConfirmationInput extends React.Component {
   validate(currentValue){
-    if (this.props.password === '') {
+    if (this.props.password === '' || this.props.password === null) {
       return {isValid:true};
     }
 
@@ -259,11 +267,12 @@ class PasswordConfirmationInput extends React.Component {
     var inputStyle = 'form-group';
     if(!errors.isValid) inputStyle += ' invalid';
 
+    var value = this.props.value ? this.props.value : '';
     return (
       <div className={inputStyle}>
         <label htmlFor="passwordConf">Confirm Password</label>
         <input type="password" id="passwordConf" name="passwordConf" className="form-control"
-                value={this.props.value}
+                value={value}
                 onChange={(e) => this.handleChange(e)}
         />
         {errors.mismatched &&
