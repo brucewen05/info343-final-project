@@ -102,8 +102,8 @@ class EventsList extends React.Component {
     }
 
     componentWillMount() {
-        var eventsRef = firebase.database().ref('events').orderByChild('date');
-        eventsRef.on('value', (snapshot) => {
+        this.eventsRef = firebase.database().ref('events').orderByChild('date');
+        this.eventsRef.on('value', (snapshot) => {
             var eventsArray = [];
             snapshot.forEach(function (child) {
                 var event = child.val();
@@ -114,14 +114,16 @@ class EventsList extends React.Component {
             this.setState({ events: eventsArray });
         });
         //listens for changes to user obj in database and stores in state
-        var usersRef = firebase.database().ref('users');
-        usersRef.on('value', (snapshot) => {
+        this.usersRef = firebase.database().ref('users');
+        this.usersRef.on('value', (snapshot) => {
             this.setState({ users: snapshot.val() });
         });
     }
 
     componentWillUnmount() {
         //unregister user and message listeners
+        // firebase.database().ref('events').off();
+        // firebase.database().ref('users').off();
         if (this.usersRef) {
             this.usersRef.off();
         }
@@ -165,7 +167,7 @@ class EventItem extends React.Component {
                     {this.props.event.description}
                 </p>
                 <br />
-                <p>Event created {moment(this.props.event.postTime).fromNow()} by {this.props.event.displayName}</p>
+                <p>Event created {moment(this.props.event.postTime).fromNow()}by {this.props.event.displayName}</p>
             </Link>
         );
     }
