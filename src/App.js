@@ -62,6 +62,7 @@ class App extends Component {
             <MenuItem onTouchTap={this.handleClose} ><Link to="/news">News</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
             <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
+            <MenuItem onTouchTap={this.handleClose} ><Link to="/login">Sign In</Link></MenuItem>
             <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon />{' '}Sign out</MenuItem>
           </DrawerMenu>
         </AppBar>

@@ -65,8 +65,17 @@ class MainPage extends React.Component {
                     </div>
                     <div className="col-xs-12">
                         <h2>About Us</h2>
-                        <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
-                        <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
+                        <p>A serious concern for immigrants in the United States post Donald Trump’s presidential election is how their “status”
+                        will be affected. Particularly for students, many are concerned and want to know how his proposed policies and the
+                        socio-political climate produced by his win will affect their education and safety. </p>
+                        <p>This website was designed with international students in mind, primarily to aid them in understanding how the election
+                        will affect them and provides resources and answers to their questions.
+                        Users can communicate via a discussion board, upload and view events within international communities, and track legislation
+                        that will directly affect their lives & education in the United States. </p>
+                        <p>This site should be able to answer
+                        questions that the campaign has stirred up and help provide stability during a time of such uncertainty for international
+                        students and persons at the University of Washington.
+                        </p>
                     </div>
 
                     <div className="col-xs-12 col-md-4 main-page-card">
