@@ -1,16 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router';
-import {Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner, Icon} from 'react-mdl';
+import { Link } from 'react-router';
+import { Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner, Icon } from 'react-mdl';
 import 'bootstrap/dist/css/bootstrap.css';
 import firebase from 'firebase';
-import {hashHistory} from 'react-router';
+import { hashHistory } from 'react-router';
 import Time from 'react-time';
+import discussionsbanner from './img/discussionsbanner.jpg';
 
 class DiscussionPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {modalOpen:false, title:'', content:'', discussions:[], showSpinner:false};
+        this.state = { modalOpen: false, title: '', content: '', discussions: [], showSpinner: false };
         this.openModal = this.openModal.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -21,20 +22,20 @@ class DiscussionPage extends React.Component {
     componentDidMount() {
         /* Add a listener and callback for authentication events */
         this.unregister = firebase.auth().onAuthStateChanged(user => {
-            if(user) {
+            if (user) {
                 console.log('Auth state changed: logged in as', user.email);
                 this.discussionsRef = firebase.database().ref('discussions');
                 this.discussionsRef.on('value', (snapshot) => {
-                    var discussionsArray=[];
+                    var discussionsArray = [];
                     snapshot.forEach((child) => {
-                        var obj = {'discussionId': child.key, 'discussionObj': child.val()};
+                        var obj = { 'discussionId': child.key, 'discussionObj': child.val() };
                         discussionsArray.push(obj);
                     });
 
-                    this.setState({discussions:discussionsArray});
+                    this.setState({ discussions: discussionsArray });
                 });
             }
-            else{
+            else {
                 console.log('Auth state changed: logged out');
                 hashHistory.push("/login");
             }
@@ -42,7 +43,7 @@ class DiscussionPage extends React.Component {
     }
 
     componentWillUnmount() {
-        if(this.unregister) {
+        if (this.unregister) {
             this.unregister();
         }
         if (this.discussionsRef) {
@@ -52,56 +53,58 @@ class DiscussionPage extends React.Component {
 
 
     openModal() {
-        this.setState({modalOpen:true});
+        this.setState({ modalOpen: true });
     }
 
     handleCreate(event) {
         event.preventDefault();
         var discussionsRef = firebase.database().ref('discussions');
         var currentUser = firebase.auth().currentUser;
-        var objToBePushed={"username": currentUser.displayName,
-                            "userId": currentUser.uid,
-                            "photoURL": currentUser.photoURL,
-                            "title": this.state.title,
-                            "createTime": firebase.database.ServerValue.TIMESTAMP,
-                            "editTime": firebase.database.ServerValue.TIMESTAMP,
-                            "content":this.state.content
-                          };
-        this.setState({showSpinner:true});
+        var objToBePushed = {
+            "username": currentUser.displayName,
+            "userId": currentUser.uid,
+            "photoURL": currentUser.photoURL,
+            "title": this.state.title,
+            "createTime": firebase.database.ServerValue.TIMESTAMP,
+            "editTime": firebase.database.ServerValue.TIMESTAMP,
+            "content": this.state.content
+        };
+        this.setState({ showSpinner: true });
         discussionsRef.push(objToBePushed).then(() => {
-            this.setState({modalOpen: false, title:'', content:'', showSpinner:false});
-        });        
+            this.setState({ modalOpen: false, title: '', content: '', showSpinner: false });
+        });
     }
 
     closeModal(event) {
         event.preventDefault();
-        this.setState({modalOpen:false});
+        this.setState({ modalOpen: false });
     }
 
     handleTitleInputChange(event) {
-        this.setState({title:event.target.value});
+        this.setState({ title: event.target.value });
     }
 
     handleContentInputChange(event) {
-        this.setState({content:event.target.value});
+        this.setState({ content: event.target.value });
     }
 
     render() {
         var result = this.state.discussions.map((discussion) => {
-            return (<DiscussionItem key={discussion.discussionId} discussionId={discussion.discussionId} discussionObj={discussion.discussionObj}/>) ;
+            return (<DiscussionItem key={discussion.discussionId} discussionId={discussion.discussionId} discussionObj={discussion.discussionObj} />);
         });
 
         var createButtonEnabled = (this.state.title !== '' && this.state.content !== '');
 
-        var spinnerSytle={'display':'none'};
+        var spinnerSytle = { 'display': 'none' };
         if (this.state.showSpinner) {
-            spinnerSytle={};
+            spinnerSytle = {};
         }
 
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1 discussion-header">
+                        <img className="banner" src={discussionsbanner} role="presentation" />
                         <h1>Discussions</h1>
                         <Button raised colored className="create-discussion" onClick={this.openModal}>Create New Discussion</Button>
                     </div>
@@ -113,13 +116,13 @@ class DiscussionPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Dialog open={this.state.modalOpen} style={{'width':'100%', 'height':'100%'}} >
+                <Dialog open={this.state.modalOpen} style={{ 'width': '100%', 'height': '100%' }} >
                     <DialogTitle>Create a new discussion post</DialogTitle>
                     <DialogContent>
                         <form>
                             <div className="form-group">
                                 <label htmlFor="discussionTitleInput">Title</label> {' '}
-                                <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" value={this.state.title}/>
+                                <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" value={this.state.title} />
                             </div>
                             <div className="form-group">
                                 <textarea type="text" className="form-control" onChange={this.handleContentInputChange} placeholder="discussion content" value={this.state.content} />
@@ -127,7 +130,7 @@ class DiscussionPage extends React.Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle}/>{' '}Create</Button>
+                        <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle} />{' '}Create</Button>
                         <Button type='button' onClick={this.closeModal} colored raised>Discard</Button>
                         {!createButtonEnabled && <div>title or content cannot be empty</div>}
                     </DialogActions>
@@ -165,9 +168,9 @@ class DiscussionItem extends React.Component {
                         <span className="thumb-down" >{' '}{dislikes}</span>
                     </span>
                     <div className="time-info">
-                        <span>created{' '}<Time value={this.props.discussionObj.createTime} relative/></span>
+                        <span>created{' '}<Time value={this.props.discussionObj.createTime} relative /></span>
                         {this.props.discussionObj.createTime !== this.props.discussionObj.editTime
-                            && <span className="edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative/></span>}
+                            && <span className="edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative /></span>}
                     </div>
                 </div>
             </Link>

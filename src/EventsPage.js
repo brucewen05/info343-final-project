@@ -3,6 +3,7 @@ import { Link, hashHistory } from 'react-router';
 import { Grid, Cell, Button } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
+import eventsbanner from './img/eventsbanner.jpg';
 
 
 class EventsPage extends React.Component {
@@ -28,6 +29,7 @@ class EventsPage extends React.Component {
     render() {
         return (
             <div>
+                <img className="banner" src={eventsbanner} role="presentation" />
                 <h1>Events</h1>
                 <Grid>
                     <NewEvent />

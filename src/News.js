@@ -1,65 +1,67 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import $ from 'jquery';
-import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import newsbanner from './img/newsbanner.jpg';
 
 class News extends React.Component {
-      constructor(props) {
-          super(props);
-          this.state = {news: undefined}
-          this.fetchData = this.fetchData.bind(this);
-      }
-      fetchData() {
-        var thisComponent = this;
-        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-        var newUrl = url + '?' + $.param({
-          'api-key': "57dc3b4f1c5a432fa6979797629a230f",
-          'q': "immigration",
-          'sort': "newest"
-        });
-        fetch(newUrl)
-        .then(function(response) {
-                var newPromise = response.json();
-                console.log(response)
-                return newPromise;
-        })
-            .then(function(data) {
-                console.log(data);
-                thisComponent.setState({news: data.response})
-            });
-      }
+  constructor(props) {
+    super(props);
+    this.state = { news: undefined }
+    this.fetchData = this.fetchData.bind(this);
+  }
+  fetchData() {
+    var thisComponent = this;
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    var newUrl = url + '?' + $.param({
+      'api-key': "57dc3b4f1c5a432fa6979797629a230f",
+      'q': "immigration",
+      'sort': "newest"
+    });
+    fetch(newUrl)
+      .then(function (response) {
+        var newPromise = response.json();
+        console.log(response)
+        return newPromise;
+      })
+      .then(function (data) {
+        console.log(data);
+        thisComponent.setState({ news: data.response })
+      });
+  }
 
 
 
-      componentDidMount() {
-        this.fetchData();
-      }
+  componentDidMount() {
+    this.fetchData();
+  }
 
-    render() {
-      var content = null;
-      if (this.state.news) {
-        content = <Stories storiesObj={this.state.news}/>;
-      }
+  render() {
+    var content = null;
+    if (this.state.news) {
+      content = <Stories storiesObj={this.state.news} />;
+    }
 
-      return (
-        <div>
-        <h1>NEWS</h1>
+    return (
+      <div>
+        <img className="banner" src={newsbanner} role="presentation" />
+        <h1>News</h1>
         {content}
-        </div>
-      )
+      </div>
+    )
   }
 }
 
 //component UpcomingLaunches is the container for all of the launch cards
 class Stories extends React.Component {
-  render () {
+  render() {
     var news = this.props.storiesObj.docs;
     console.log(news);
-     var StoryCardArray=news.map(function(story) {
-       return <StoryCard story={story} key={story.web_url}/>
-     });
+    var StoryCardArray = news.map(function (story) {
+      return <StoryCard story={story} key={story.web_url} />
+    });
     return (
       <div className="container">
         {StoryCardArray}
@@ -76,17 +78,17 @@ class StoryCard extends React.Component {
 
     return (
       <MuiThemeProvider>
-      <Card>
-        <CardTitle title={this.props.story.headline.main} subtitle={this.props.story.pub_date} />
-        <CardText>
-          {this.props.story.snippet}
-        </CardText>
-        <CardActions>
-        <a href={this.props.story.web_url}>
-          <FlatButton label="Learn More" />
-        </a>
-        </CardActions>
-      </Card>
+        <Card>
+          <CardTitle title={this.props.story.headline.main} subtitle={this.props.story.pub_date} />
+          <CardText>
+            {this.props.story.snippet}
+          </CardText>
+          <CardActions>
+            <a href={this.props.story.web_url}>
+              <FlatButton label="Learn More" />
+            </a>
+          </CardActions>
+        </Card>
       </MuiThemeProvider>
     );
   }
