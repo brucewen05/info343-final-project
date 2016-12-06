@@ -132,8 +132,8 @@ class DiscussionPage extends React.Component {
                     <DialogActions>
                         <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle} />{' '}Create</Button>
                         <Button type='button' onClick={this.closeModal} colored raised>Discard</Button>
-                        {!createButtonEnabled && <div>title or content cannot be empty</div>}
                     </DialogActions>
+                    {!createButtonEnabled && <div className="has-error"><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
                 </Dialog>
             </div>
         );
