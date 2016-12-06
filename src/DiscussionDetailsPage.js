@@ -289,34 +289,37 @@ class ReplyItem extends React.Component {
 
         return(
             <li className="row">                    
-                <div className="votes-container col-xs-1">
-                    <div><IconButton name="arrow_drop_up" disabled={this.state.voted} onClick={this.handleUpVote}/></div>
+                <div className="col-xs-1 votes-container">
+                    <IconButton name="arrow_drop_up" disabled={this.state.voted} onClick={this.handleUpVote}/>
                     <div className="vote-num">{this.state.votes}</div>
-                    <div><IconButton name="arrow_drop_down" disabled={this.state.voted} onClick={this.handleDownVote} /></div>
+                    <IconButton name="arrow_drop_down" disabled={this.state.voted} onClick={this.handleDownVote} />
                 </div>
-                <div className="col-xs-11 row">
-                    <div className="col-xs-12">
-                        <div className="user-info-container">
-                            <UserInfo photoURL={this.props.conversationDetails.photoURL} username={this.props.conversationDetails.username}/>
-                            {editAndDeleteButtonShown && 
-                                <div className="item-controls">
-                                    <Button onClick={this.handleClickEdit}>edit</Button>
-                                    <Button onClick={this.handleDelete}>delete</Button>
-                                </div>
-                            }
+                <div className="col-xs-11">
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <div className="user-info-container">
+                                <UserInfo photoURL={this.props.conversationDetails.photoURL} username={this.props.conversationDetails.username}/>
+                                {editAndDeleteButtonShown && 
+                                    <div className="item-controls">
+                                        <Button onClick={this.handleClickEdit}>edit</Button>
+                                        <Button onClick={this.handleDelete}>delete</Button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div className="col-xs-12">
+                            {content}
                         </div>
                     </div>
-                    <div className="col-xs-9">
-                        {content}
-                    </div>
                 </div>
-                <div className="col-xs-12">
+                <div className="col-xs-12 time-container">
                     <div className="time-info"><span>posted{' '}<Time value={this.props.conversationDetails.createTime} relative/></span>
                         {this.props.conversationDetails.createTime !== this.props.conversationDetails.editTime
                             && <span className="edit-time">edited{' '}<Time value={this.props.conversationDetails.editTime} relative/></span>}
                     </div>
+                    <br />
+                    <hr />
                 </div>
-                <hr />
             </li>
         );
     }
@@ -451,7 +454,7 @@ class CreatorItem extends React.Component {
                         }
                     </div>
                     <div>{content}</div>
-                    <div>
+                    <div className="time-container">
                         <span className="thumb-up"><IconButton name="thumb_up" onClick={this.handleLike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.likes}</span>{' '}
                         <span className="thumb-down thumb-down-container"><IconButton name="thumb_down" onClick={this.handleDislike} disabled={!likeOrDislikeButtonEnabled} />{' '}{this.state.dislikes}</span>
                         <div className="time-info"><span>created{' '}<Time value={this.props.createTime} relative/></span>

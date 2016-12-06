@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid, Cell } from 'react-mdl';
 import { Link } from 'react-router';
 import firebase from 'firebase';
 import homebanner from './img/homebanner.jpg';
@@ -59,43 +58,48 @@ class MainPage extends React.Component {
         }
 
         return (
-            <Grid id="home-content">
-                <Cell col={12} >
-                    <img className="banner" src={homebanner} role="presentation" />
-                </Cell>
-                <Cell col={12}>
-                    <h2>About Us</h2>
-                    <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
-                    <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
-                </Cell>
-                <Cell col={4}>
-                    <Link to="/discussions" className="list-group-item">
-                        <div className="page-desc-heading">
-                            <i className="material-icons">question_answer</i>
-                            <h2>Discussions</h2>
-                        </div>
-                        {discussionContent}
-                    </Link>
-                </Cell>
-                <Cell col={4}>
-                    <Link to="/news" className="list-group-item">
-                        <div className="page-desc-heading">
-                            <i className="material-icons">picture_in_picture</i>
-                            <h2>News</h2>
-                        </div>
+            <div className="container" id="home-content">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <img className="banner" src={homebanner} role="presentation" />
+                    </div>
+                    <div className="col-xs-12">
+                        <h2>About Us</h2>
                         <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
-                    </Link>
-                </Cell>
-                <Cell col={4}>
-                    <Link to="/events" className="list-group-item">
-                        <div className="page-desc-heading">
-                            <i className="material-icons">event</i>
-                            <h2>Events</h2>
-                        </div>
                         <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
-                    </Link>
-                </Cell>
-            </Grid>
+                    </div>
+
+                    <div className="col-xs-12 col-md-4 main-page-card">
+                        <Link to="/discussions" className="list-group-item">
+                            <div className="page-desc-heading">
+                                <i className="material-icons">question_answer</i>
+                                <h2>Discussions</h2>
+                            </div>
+                            {discussionContent}
+                        </Link>
+                    </div>
+
+                    <div className="col-xs-12 col-md-4 main-page-card">
+                        <Link to="/news" className="list-group-item">
+                            <div className="page-desc-heading">
+                                <i className="material-icons">picture_in_picture</i>
+                                <h2>News</h2>
+                            </div>
+                            <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
+                        </Link>
+                    </div>
+
+                    <div className="col-xs-12 col-md-4 main-page-card">
+                        <Link to="/events" className="list-group-item">
+                            <div className="page-desc-heading">
+                                <i className="material-icons">event</i>
+                                <h2>Events</h2>
+                            </div>
+                            <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
+                        </Link>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
@@ -104,7 +108,7 @@ class DiscussionItem extends React.Component {
     render() {
         return (
             <li>
-                <div>{this.props.discussion.title}
+                <div className="main-page-discussion-title">{this.props.discussion.title}
                 </div>
                 <div className="main-page-post-time">posted{' '}<Time value={this.props.discussion.createTime} relative/>
                 </div>

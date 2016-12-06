@@ -1,42 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {Grid, Cell, Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner, Icon} from 'react-mdl';
+import {Button, Dialog, DialogContent, DialogActions, DialogTitle, Spinner, Icon} from 'react-mdl';
 import 'bootstrap/dist/css/bootstrap.css';
 import firebase from 'firebase';
 import {hashHistory} from 'react-router';
 import Time from 'react-time';
-
-// var data = [
-//     {
-//         "ABC":{"username": "u1",
-//                 "userId": 123456,
-//                 "title": "discussion1",
-//                 "createTime": "11/29/2016",
-//                 "editTime": "11/29/2016",
-//                 "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
-//                 "likes": 5,
-//                 "dislikes": 2,
-//                 "conversations": {
-//                     "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
-//                     "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
-//                 }
-//               }             
-//     },
-//     {"DEF":{"username": "u2",
-//                 "userId": 654321,
-//                 "title": "discussion2",
-//                 "createTime": "11/27/2016",
-//                 "editTime": "11/28/2016",
-//                 "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Smod tempor incididunt ut labore et dolore magna aliqua. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod t",
-//                 "likes": 3,
-//                 "dislikes": 2,
-//                 "conversations": {
-//                     "hash1":{"username": "other1", "userId": 789, "reply": "Lorem ipsum dolor sit amet, consectetur"},
-//                     "hash2":{"username": "other2", "userId": 987, "reply": "sed do eiusmod tempor incididunt"}
-//                 }
-//               }
-//     }
-// ];
 
 class DiscussionPage extends React.Component {
     constructor(props) {
@@ -131,16 +99,20 @@ class DiscussionPage extends React.Component {
         }
 
         return (
-            <Grid>
-                <Cell col={10} offset={1} className="discussion-page-header" style={{'marginBottom':'30px'}}>
-                    <h1>Discussions</h1>
-                    <Button raised colored className="create-discussion" onClick={this.openModal}>Create New Discussion</Button>
-                </Cell>
-                <Cell col={10} offset={1}>
-                    <div className="list-group">
-                        {result}
+            <div className="container">
+                <div className="row">
+                    <div className="col-xs-10 col-xs-offset-1 discussion-header">
+                        <h1>Discussions</h1>
+                        <Button raised colored className="create-discussion" onClick={this.openModal}>Create New Discussion</Button>
                     </div>
-                </Cell>
+                </div>
+                <div className="row">
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <div className="list-group">
+                            {result}
+                        </div>
+                    </div>
+                </div>
                 <Dialog open={this.state.modalOpen} style={{'width':'100%', 'height':'100%'}} >
                     <DialogTitle>Create a new discussion post</DialogTitle>
                     <DialogContent>
@@ -160,7 +132,7 @@ class DiscussionPage extends React.Component {
                         {!createButtonEnabled && <div>title or content cannot be empty</div>}
                     </DialogActions>
                 </Dialog>
-            </Grid>
+            </div>
         );
     }
 }
@@ -181,7 +153,7 @@ class DiscussionItem extends React.Component {
                 <h1 className="list-group-item-heading">{this.props.discussionObj.title}</h1>
                 <p className="list-group-item-text dicussion-content">{this.props.discussionObj.content}</p>
                 <br />
-                <div className="list-group-item-text">
+                <div className="list-group-item-text time-container">
                     <span>Read more</span>
                     <div></div>
                     <span>
