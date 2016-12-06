@@ -28,7 +28,7 @@ class About extends React.Component {
           <div className="creator col-xs-12 col-md-4">
             <img className="creator-img" src={alyssa} alt="Alyssa"/>
             <div className="creator-text">
-              <h3>Alyssa</h3><p>is a junior at the University of Washington majoring in Informatics. She is from...</p>
+              <h3>Alyssa</h3><p>is a junior at the University of Washington majoring in Informatics. She is from Bainbridge Island, WA.</p>
             </div>
           </div>
           <div className="creator col-xs-12 col-md-4">

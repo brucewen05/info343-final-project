@@ -94,7 +94,8 @@ class MainPage extends React.Component {
                                 <i className="material-icons">picture_in_picture</i>
                                 <h2>News</h2>
                             </div>
-                            <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
+                            <p>Access a live feed of recent news stories relating to immigration legislation and read full articles by following the links provided.
+                            Learn about policies or legislation that may directly impact you as a student so you can make a plan for your education.</p>
                         </Link>
                     </div>
 
@@ -104,7 +105,7 @@ class MainPage extends React.Component {
                                 <i className="material-icons">event</i>
                                 <h2>Events</h2>
                             </div>
-                            <p>Dolor nostrud mollit mollit et tempor do. Occaecat officia culpa mollit ad id magna ullamco aliqua nostrud aliquip sit in anim pariatur. Culpa culpa commodo nulla id aute sint. Laboris in velit Lorem minim quis cillum sit ea dolor aliqua cupidatat exercitation. Nulla nulla nulla nisi reprehenderit quis Lorem et aliqua excepteur voluptate labore aute. Duis irure ex culpa nisi nostrud cillum id ex ea incididunt. Nisi aliquip ullamco amet minim adipisicing aliquip excepteur amet occaecat ea ex non cillum cillum.</p>
+                            <p>Learn about events that are happening on campus and in the area for international students and allies who are also concerned about the state of the country so you can become a part of a supportive community. If you know about an event that is happening, feel free to post it here for others to see.</p>
                         </Link>
                     </div>
                 </div>
