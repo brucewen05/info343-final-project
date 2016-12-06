@@ -11,8 +11,6 @@ import SignUpPage from './SignUpPage.js';
 import MainPage from './MainPage.js';
 import DiscussionsPage from './DiscussionsPage.js';
 import DiscussionDetailsPage from './DiscussionDetailsPage.js';
-import FAQsPage from './FAQsPage.js';
-import FAQDetailsPage from './FAQDetailsPage.js';
 import EventsPage from './EventsPage.js';
 import EventDetailsPage from './EventDetailsPage.js';
 import About from './About.js';
@@ -30,14 +28,12 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={SignInPage} />
+      <IndexRoute component={MainPage} />
       <Route path="join" component={SignUpPage} />
       <Route path="login" component={SignInPage} />
       <Route path="main" component={MainPage} />
       <Route path="discussions" component={DiscussionsPage} />
       <Route path="discussion/:discussionId" component={DiscussionDetailsPage} />
-      <Route path="FAQs" component={FAQsPage} />
-      <Route path="FAQ/:FAQId" component={FAQDetailsPage} />
       <Route path="events" component={EventsPage} />
       <Route path="event/:eventId" component={EventDetailsPage} />
       <Route path="about" component={About}/>

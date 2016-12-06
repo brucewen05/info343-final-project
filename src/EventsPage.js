@@ -140,7 +140,11 @@ class EventsList extends React.Component {
             if (eventDate > yesterday) {
                 return <EventItem event={event} eventId={event.key} key={event.key} />
             } else {
+<<<<<<< HEAD
                 return <div></div>
+=======
+                return null;
+>>>>>>> eb2a2313b135921b1eec9e3e0d7da715016ea28c
             }
         });
 
