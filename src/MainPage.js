@@ -84,6 +84,7 @@ class MainPage extends React.Component {
                                 <i className="material-icons">question_answer</i>
                                 <h2>Discussions</h2>
                             </div>
+                            <p>Start or join a discussion with other students.</p>
                             {discussionContent}
                         </Link>
                     </div>
