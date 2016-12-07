@@ -22,7 +22,7 @@ class Resources extends React.Component {
         <p>Go to UW? Find some RSOs that have to do with a community you are a part of or want to join.</p>
         <li><a href="http://www.seattle.gov/">Seattle Government</a></li>
         <p>Learn more about how the Seattle government works and how to make oyur voice heard.</p>
-        <li><a href="http://www.house.gov/representatives/find/">Find your local representaive</a></li>
+        <li><a href="http://www.house.gov/representatives/find/">Find your local representative</a></li>
         <p>Not from Seattle? Find out who to contact about legilation and events that happen in your area.</p>
         </ul>
       </div>
