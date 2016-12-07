@@ -45,7 +45,7 @@ class News extends React.Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <img className="banner" src={newsbanner} role="presentation" />
         <h1>News</h1>
         {content}

@@ -58,11 +58,23 @@ class MainPage extends React.Component {
         }
 
         return (
-            <div className="container" id="home-content">
-                <div className="row">
-                    <div className="col-xs-12">
-                        <img className="banner" src={homebanner} role="presentation" />
+                <div>
+                  <div className="header-cont">
+                    <header className="main-header">
+
+                    <div className="header-text">
+                    <h1 className="header-title">TITLE</h1>
+                    <p className="header-desc">A hub for international students</p>
+                    <ul>
+                    <li className="header-desc list-item">at UW</li>
+                    <li className="header-desc list-item">in the Seattle area</li>
+                    <li className="header-desc list-item">and beyond</li>
+                    </ul>
                     </div>
+
+                    </header>
+                  </div>
+                    <div className="container" id="home-content">
                     <div className="col-xs-12">
                         <h2>About Us</h2>
                         <p>A serious concern for immigrants in the United States post Donald Trump’s presidential election is how their “status”
