@@ -8,16 +8,10 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
-
-
-
-
+import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
-
-
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +20,7 @@ class App extends Component {
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.sign = null;
   }
 
   handleToggle() {
@@ -44,6 +39,19 @@ class App extends Component {
     hashHistory.push("/login");
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        console.log('should be able to log out');
+        this.sign = <Link to="/login"><MenuItem onTouchTap={this.handleClose} >Sign In</MenuItem></Link>;
+
+      }
+      else{
+        console.log('should be able to log in');
+      }
+    })
+  }
+
   render() {
     return (
      <div>
@@ -52,26 +60,88 @@ class App extends Component {
           title="Title"
           iconElementLeft={<IconButton><MenuIcon /></IconButton>}
           onLeftIconButtonTouchTap={this.handleToggle} >
+          <div id="topNav">
+            <Link to="/main"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Homepage</FlatButton></Link>
+            <Link to="/about"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >About</FlatButton></Link>
+            <Link to="/news"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >News</FlatButton></Link>
+            <Link to="/discussions"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Discussions</FlatButton></Link>
+            <Link to="/events"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Events</FlatButton></Link>
+            <SignInOrOutTop handleClose={this.handleClose} handleSignOut={this.handleSignOut}/>
+          </div>
           <DrawerMenu
             docked={false}
             width={200}
             open={this.state.open}
             onRequestChange={(open) => {this.setState({open})} } >
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/main">Homepage</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/about">About</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/news">News</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/discussions">Discussions</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/events">Events</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleClose} ><Link to="/login">Sign In</Link></MenuItem>
-            <MenuItem onTouchTap={this.handleSignOut}><ArrowIcon />{' '}Sign out</MenuItem>
+            <h3>TITLE</h3>
+            <Link to="/main"><MenuItem onTouchTap={this.handleClose} >Homepage</MenuItem></Link>
+            <Link to="/about"><MenuItem onTouchTap={this.handleClose} >About</MenuItem></Link>
+            <Link to="/news"><MenuItem onTouchTap={this.handleClose} >News</MenuItem></Link>
+            <h3>Member content</h3>
+            <Link to="/discussions"><MenuItem onTouchTap={this.handleClose} >Discussions</MenuItem></Link>
+            <Link to="/events"><MenuItem onTouchTap={this.handleClose} >Events</MenuItem></Link>
+            <br/>
+            <SignInOrOut handleClose={this.handleClose} handleSignOut={this.handleSignOut}/>
           </DrawerMenu>
         </AppBar>
       </MuiThemeProvider>
-      <div className="container">
+
         {this.props.children}
-      </div>
+  
     </div>
     );
   }
 }
+
+class SignInOrOut extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {link: '', touchTap: null, text: ''}
+  }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        console.log('should be able to log out');
+        this.setState({link: '/main', touchTap: this.props.handleSignOut, text: 'Sign Out'})
+
+      }
+      else{
+        console.log('should be able to log in');
+        this.setState({link: '/login', touchTap: this.props.handleClose, text: 'Sign In'})
+      }
+    })
+  }
+  render() {
+    return (
+      <Link to={this.state.link}><MenuItem onTouchTap={this.state.touchTap}><ArrowIcon />{' '}{this.state.text}</MenuItem></Link>
+    );
+  }
+}
+
+class SignInOrOutTop extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {link: '', touchTap: null, text: ''}
+  }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        console.log('should be able to log out');
+        this.setState({link: '/main', touchTap: this.props.handleSignOut, text: 'Sign Out'})
+
+      }
+      else{
+        console.log('should be able to log in');
+        this.setState({link: '/login', touchTap: this.props.handleClose, text: 'Sign In'})
+      }
+    })
+  }
+  render() {
+    return (
+      <Link to={this.state.link}><FlatButton style={{color: 'white'}} onTouchTap={this.state.touchTap}><ArrowIcon style={{color: 'white'}} />{' '}{this.state.text}</FlatButton></Link>
+    );
+  }
+}
+
+
 export default App;
