@@ -29,14 +29,14 @@ class EventsPage extends React.Component {
     render() {
         return (
             <div className="container">
-            <div className="row">
-                <div className="col-xs-10 col-xs-offset-1">
-                    <img className="banner" src={eventsbanner} role="presentation" />
-                    <h1>Events</h1>
-                </div>
-                <NewEvent />
-                <EventsList />
-            </div >
+                <div className="row">
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <img className="banner" src={eventsbanner} role="presentation" />
+                        <h1>Events</h1>
+                    </div>
+                    <NewEvent />
+                    <EventsList />
+                </div >
             </div>
         );
     }
@@ -161,18 +161,20 @@ class EventsList extends React.Component {
 class EventItem extends React.Component {
     render() {
         return (
-            <Link to={"/event/" + this.props.eventId} className="list-group-item">
-                <h2 className="list-group-item-heading">{this.props.event.title}</h2>
-                <p>Date: {this.props.event.date}</p>
-                <p>Time: {this.props.event.time}</p>
-                <p>Location: {this.props.event.location}</p>
-                <hr />
-                <p className="list-group-item-text event-description">
-                    {this.props.event.description}
-                </p>
-                <br />
-                <p>Event created {moment(this.props.event.postTime).fromNow()}by {this.props.event.displayName}</p>
-            </Link>
+            <div className="post">
+                <Link to={"/event/" + this.props.eventId} className="list-group-item">
+                    <h2 className="list-group-item-heading">{this.props.event.title}</h2>
+                    <p><span className="event-info">Date</span>: {this.props.event.date}</p>
+                    <p><span className="event-info">Time</span>: {this.props.event.time}</p>
+                    <p><span className="event-info">Location</span>: {this.props.event.location}</p>
+                    <hr />
+                    <p className="list-group-item-text event-description">
+                        {this.props.event.description}
+                    </p>
+                    <br />
+                    <p>Event created <span className="event-info">{moment(this.props.event.postTime).fromNow()}</span> by <span className="event-info">{this.props.event.displayName}</span></p>
+                </Link>
+            </div>
         );
     }
 }
