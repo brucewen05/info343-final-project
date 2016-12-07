@@ -22,6 +22,7 @@ class Resources extends React.Component {
         <br/>
           <p>The current political and social climate in the United States of America has been pretty unstable as of late. It is not a particularly comfortable subject to talk about, especially for international students.
           We wanted to make a resource that provides students with the necessary community and tools to let them stay as educated and up-to-date as possible. </p>
+          <p>This website is geared towards international studnets in Seattle. We are three students from the University of Washington in Seattle and we hope that this website can help unite and create a community in our area.</p>
           <h3>What can you do with ITNL?</h3>
           <p>
           Users can communicate via a discussion board, upload and view events within international communities, and track important news
