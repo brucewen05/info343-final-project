@@ -45,10 +45,19 @@ class News extends React.Component {
     }
 
     return (
+      <div>
+      <div className="header-cont">
+        <header className="main-header news-header">
+        <div className="header-text">
+        <h1 className="header-title">News</h1>
+        <p className="header-desc">A newsfeed focusing on immigration matters straight from the NYTimes.</p>
+        </div>
+        </header>
+        </div>
       <div className="container">
-        <img className="banner" src={newsbanner} role="presentation" />
-        <h1>News</h1>
+      <br/>
         {content}
+      </div>
       </div>
     )
   }

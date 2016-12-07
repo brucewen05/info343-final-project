@@ -101,14 +101,17 @@ class DiscussionPage extends React.Component {
         }
 
         return (
+          <div>
+          <div className="header-cont">
+            <header className="main-header discussion-header">
+            <div className="header-text">
+            <h1 className="header-title">Discussions</h1>
+            <p className="header-desc">Ask or discuss & your peers will respond</p>
+            </div>
+            </header>
+            </div>
+            <br/>
             <div className="container">
-                <div className="row">
-                    <div className="col-xs-10 col-xs-offset-1 discussion-header">
-                        <img className="banner" src={discussionsbanner} role="presentation" />
-                        <h1>Discussions</h1>
-                        <Button raised colored className="create-discussion" onClick={this.openModal}>Create New Discussion</Button>
-                    </div>
-                </div>
                 <div className="row">
                     <div className="col-xs-10 col-xs-offset-1">
                         <div className="list-group">
@@ -135,6 +138,7 @@ class DiscussionPage extends React.Component {
                     </DialogActions>
                     {!createButtonEnabled && <div className="has-error"><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
                 </Dialog>
+            </div>
             </div>
         );
     }

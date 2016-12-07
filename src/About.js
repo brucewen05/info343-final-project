@@ -8,9 +8,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 class About extends React.Component {
   render() {
     return (
+      <div>
+      <div className="header-cont">
+        <header className="main-header about-header">
+        <div className="header-text">
+        <h1 className="header-title">About</h1>
+        </div>
+        </header>
+        </div>
       <div id="about-container" className="container">
-        <h1> About </h1>
         <div>
+        <br/>
           <p>A serious concern for immigrants in the United States post Donald Trump’s presidential election is how their “status”
           will be affected. Particularly for students, many are concerned and want to know how his proposed policies and the
           socio-political climate produced by his win will affect their education and safety. </p>
@@ -35,7 +43,7 @@ class About extends React.Component {
             <img className="creator-img" src={bruce} alt="Bruce"/>
             <div className="creator-text">
               <h3>Bruce</h3>
-              <p>is a senior at the University of Washington majoring in Computer Science. He is interested in web development and wants 
+              <p>is a senior at the University of Washington majoring in Computer Science. He is interested in web development and wants
               to use his web development skill to help those who might be affected by Trump’s presidential election.</p>
             </div>
           </div>
@@ -47,6 +55,7 @@ class About extends React.Component {
           </div>
         </div>
         <div><Link to="/main">Go back to main page</Link></div>
+      </div>
       </div>
     )
   }

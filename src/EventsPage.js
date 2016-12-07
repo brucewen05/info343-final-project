@@ -28,14 +28,22 @@ class EventsPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <img className="banner" src={eventsbanner} role="presentation" />
-                <h1>Events</h1>
+          <div>
+          <div className="header-cont">
+            <header className="main-header events-header">
+            <div className="header-text">
+            <h1 className="header-title">Events</h1>
+            <p className="header-desc">Meet up withs peers in the area!</p>
+            </div>
+            </header>
+            </div>
+            <div className='container'>
                 <Grid>
                     <NewEvent />
                     <EventsList />
                 </Grid>
             </div>
+          </div>
         );
     }
 }

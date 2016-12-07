@@ -271,6 +271,22 @@
   height: 100%;
 }
 
+.about-header {
+  background-image: url('./img/mainbanner.jpg');
+}
+
+.news-header {
+  background-image: url('./img/newsbanner.jpg');
+}
+
+.discussion-header {
+  background-image: url('./img/discussionsbanner.jpg');
+}
+
+.events-header {
+  background-image: url('./img/eventsbanner.jpg');
+}
+
 .header-text {
   color: white;
   padding: 20px;
