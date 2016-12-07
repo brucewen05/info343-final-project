@@ -20,7 +20,6 @@ class App extends Component {
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.sign = null;
   }
 
   handleToggle() {
@@ -37,19 +36,6 @@ class App extends Component {
       firebase.auth().signOut();
     }
     hashHistory.push("/login");
-  }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-        console.log('should be able to log out');
-        this.sign = <Link to="/login"><MenuItem onTouchTap={this.handleClose} >Sign In</MenuItem></Link>;
-
-      }
-      else{
-        console.log('should be able to log in');
-      }
-    })
   }
 
   render() {
@@ -87,7 +73,7 @@ class App extends Component {
       </MuiThemeProvider>
 
         {this.props.children}
-  
+
     </div>
     );
   }

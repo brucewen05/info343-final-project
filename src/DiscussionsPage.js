@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import firebase from 'firebase';
 import { hashHistory } from 'react-router';
 import Time from 'react-time';
-import discussionsbanner from './img/discussionsbanner.jpg';
 
 class DiscussionPage extends React.Component {
     constructor(props) {

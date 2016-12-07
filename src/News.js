@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 import $ from 'jquery';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import newsbanner from './img/newsbanner.jpg';
 
 class News extends React.Component {
   constructor(props) {

@@ -3,7 +3,6 @@ import { Link, hashHistory } from 'react-router';
 import { Button } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
-import eventsbanner from './img/eventsbanner.jpg';
 
 
 class EventsPage extends React.Component {

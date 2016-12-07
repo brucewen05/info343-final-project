@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import firebase from 'firebase';
-import homebanner from './img/homebanner.jpg';
 import Time from 'react-time';
 
 class MainPage extends React.Component {
