@@ -6,6 +6,8 @@ import firebase from 'firebase';
 import { hashHistory } from 'react-router';
 import Time from 'react-time';
 
+
+
 class DiscussionPage extends React.Component {
     constructor(props) {
         super(props);
@@ -29,6 +31,10 @@ class DiscussionPage extends React.Component {
                     snapshot.forEach((child) => {
                         var obj = { 'discussionId': child.key, 'discussionObj': child.val() };
                         discussionsArray.push(obj);
+                    });
+
+                    discussionsArray.sort((a, b) => {
+                        return b.discussionObj.createTime - a.discussionObj.createTime;
                     });
 
                     this.setState({ discussions: discussionsArray });
@@ -55,6 +61,7 @@ class DiscussionPage extends React.Component {
         this.setState({ modalOpen: true });
     }
 
+    // callback function when the user hit the create button
     handleCreate(event) {
         event.preventDefault();
         var discussionsRef = firebase.database().ref('discussions');
@@ -146,6 +153,7 @@ class DiscussionPage extends React.Component {
     }
 }
 
+// this component represents a single thread on the discussion page
 class DiscussionItem extends React.Component {
     count(obj) {
         if (obj) {

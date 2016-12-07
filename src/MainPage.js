@@ -31,7 +31,11 @@ class MainPage extends React.Component {
                 discussionsArray.push(obj);
             });
             //updates discussion list
-            this.setState({'discussions': discussionsArray});
+            discussionsArray.sort((a, b) => {
+                return b.value.createTime - a.value.createTime;
+            });
+            var sliced = discussionsArray.slice(0, 2);
+            this.setState({'discussions': sliced});
         });
     }
 
