@@ -46,15 +46,16 @@ class EventsPage extends React.Component {
     }
 }
 
+//box for submitting a new event to the page
 class NewEvent extends React.Component {
     constructor(props) {
         super(props);
         this.state = { title: "", date: "", time: "", location: "", description: "" };
-
+        
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    //handles title input
+    //handles field input and stores in state
     handleInputChange(event, field) {
         this.setState({ [field]: event.target.value });
     }
@@ -74,6 +75,7 @@ class NewEvent extends React.Component {
             description: this.state.description,
             postTime: firebase.database.ServerValue.TIMESTAMP
         }
+        //reset input fields
         this.setState({
             title: "",
             date: "",
@@ -81,10 +83,12 @@ class NewEvent extends React.Component {
             location: "",
             description: ""
         });
+        //add event data to firebase db
         eventsRef.push(eventData);
     }
 
     render() {
+        //for submit button
         var postEnabled = (this.state.title !== '' && this.state.date !== '' && this.state.time !== '' && this.state.location !== '' && this.state.description !== '');
 
         return (
@@ -103,6 +107,7 @@ class NewEvent extends React.Component {
     }
 }
 
+//holds all event items
 class EventsList extends React.Component {
     constructor(props) {
         super(props);
@@ -110,6 +115,7 @@ class EventsList extends React.Component {
     }
 
     componentWillMount() {
+        //orders by closest date at the top
         this.eventsRef = firebase.database().ref('events').orderByChild('date');
         this.eventsRef.on('value', (snapshot) => {
             var eventsArray = [];
@@ -118,7 +124,7 @@ class EventsList extends React.Component {
                 event.key = child.key;
                 eventsArray.push(event);
             });
-            //updates list
+            //updates event list
             this.setState({ events: eventsArray });
         });
         //listens for changes to user obj in database and stores in state
@@ -130,8 +136,6 @@ class EventsList extends React.Component {
 
     componentWillUnmount() {
         //unregister user and message listeners
-        // firebase.database().ref('events').off();
-        // firebase.database().ref('users').off();
         if (this.usersRef) {
             this.usersRef.off();
         }
@@ -145,6 +149,7 @@ class EventsList extends React.Component {
         yesterday = yesterday.getTime();
         var eventItems = this.state.events.map((event) => {
             var eventDate = Date.parse(event.date);
+            //only shows events that are from today on
             if (eventDate > yesterday) {
                 return <EventItem event={event} eventId={event.key} key={event.key} />
             } else {

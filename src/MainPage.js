@@ -12,7 +12,7 @@ class MainPage extends React.Component {
         this.state = {'discussions': null};
     }
     componentDidMount() {
-        /* Add a listener and callback for authentication events */
+        // Add a listener and callback for authentication events
         this.unregister = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 console.log('Auth state changed: logged in as', user.email);
@@ -29,11 +29,13 @@ class MainPage extends React.Component {
                 var obj = {'key': child.key, 'value': child.val()};
                 discussionsArray.push(obj);
             });
+            //updates discussion list
             this.setState({'discussions': discussionsArray});
         });
     }
 
     componentWillUnmount() {
+        //unregister listeners
         if (this.discussionRef) {
             this.discussionRef.off();
         }
@@ -45,6 +47,7 @@ class MainPage extends React.Component {
     render() {
         var discussionContent = undefined;
         if (this.state.discussions) {
+            //gives preview of recent discussions
             var discussions = this.state.discussions.map((discussion) => {
                 return (<DiscussionItem key={discussion.key} discussion={discussion.value}/>);
             });
@@ -54,7 +57,7 @@ class MainPage extends React.Component {
                                         {discussions}
                                     </ul>
                                 </div>);
-        } else {
+        } else { //if the discussion board is empty
             discussionContent = (<div className="main-page-discussion">There are no discussions currently. Create your first one!</div>)
         }
 
@@ -123,6 +126,7 @@ class MainPage extends React.Component {
     }
 }
 
+//individual discussion preview items
 class DiscussionItem extends React.Component {
     render() {
         return (

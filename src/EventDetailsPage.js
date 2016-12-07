@@ -6,6 +6,7 @@ import moment from 'moment';
 class EventDetailsPage extends React.Component {
     constructor(props) {
         super(props);
+        //info about the event post
         this.state = {
             userId: '',
             displayName: '',
@@ -21,6 +22,7 @@ class EventDetailsPage extends React.Component {
     componentDidMount() {
         this.unregister = firebase.auth().onAuthStateChanged(user => {
             if (user) {
+                //reference to the specific event
                 this.eventDetailsRef = firebase.database().ref('events/' + this.props.params.eventId);
                 this.eventDetailsRef.on('value', (snapshot) => {
                     var eventObj = {};
@@ -30,13 +32,14 @@ class EventDetailsPage extends React.Component {
                     this.setState(eventObj);
                 });
             }
-            else {
+            else { //if user tries to go to this page and is not logged in
                 hashHistory.push("/login");
             }
         });
     }
 
     componentWillUnmount() {
+        //unregister listeners
         if (this.eventDetailsRef) {
             this.eventDetailsRef.off();
         }
