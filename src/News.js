@@ -57,6 +57,7 @@ class News extends React.Component {
         <div className="container">
           <br />
           {content}
+          <p>Credit: <a href="http://developer.nytimes.com/">NY Times developer</a></p>
         </div>
       </div>
     )
@@ -84,7 +85,6 @@ class StoryCard extends React.Component {
   render() {
     //  var news = this.props.stories.docs;
     //  console.log(news);
-
     return (
       <div className="post">
         <MuiThemeProvider>
