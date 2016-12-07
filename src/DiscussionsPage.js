@@ -101,16 +101,19 @@ class DiscussionPage extends React.Component {
 
         return (
             <div>
-                <div className="header-cont">
-                    <header className="main-header discussion-header">
-                        <div className="header-text">
-                            <h1 className="header-title">Discussions</h1>
-                            <p className="header-desc">Ask or discuss & your peers will respond</p>
-                        </div>
-                    </header>
-                </div>
+            <div className="header-cont">
+                <header className="main-header discussion-header">
+                    <div className="header-text">
+                        <h1 className="header-title">Discussions</h1>
+                        <p className="header-desc">Ask or discuss & your peers will respond</p>
+                    </div>
+                </header>
+            </div>
                 <br />
                 <div className="container">
+                <div className="col-xs-10 col-xs-offset-1">
+                    <Button className="button-create" raised colored onClick={this.openModal}> Create New Discussion </Button>
+                </div>
                     <div className="row">
                         <div className="col-xs-10 col-xs-offset-1">
                             <div className="list-group">
