@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, hashHistory } from 'react-router';
-import { Grid, Cell, Button } from 'react-mdl';
+import { Button } from 'react-mdl';
 import firebase from 'firebase';
 import moment from 'moment';
 import eventsbanner from './img/eventsbanner.jpg';
@@ -28,14 +28,14 @@ class EventsPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <img className="banner" src={eventsbanner} role="presentation" />
-                <h1>Events</h1>
-                <Grid>
-                    <NewEvent />
-                    <EventsList />
-                </Grid>
-            </div>
+            <div className="row">
+                <div className="col-xs-10 col-xs-offset-1">
+                    <img className="banner" src={eventsbanner} role="presentation" />
+                    <h1>Events</h1>
+                </div>
+                <NewEvent />
+                <EventsList />
+            </div >
         );
     }
 }
@@ -82,7 +82,7 @@ class NewEvent extends React.Component {
         var postEnabled = (this.state.title !== '' && this.state.date !== '' && this.state.time !== '' && this.state.location !== '' && this.state.description !== '');
 
         return (
-            <Cell col={12} className="list-group-item">
+            <div className="col-xs-10 col-xs-offset-1 list-group-item">
                 <h2>Add a new event</h2>
                 <form>
                     <input type="text" className="form-control" value={this.state.title} onChange={(event) => this.handleInputChange(event, "title")} placeholder="Title" /> <br />
@@ -92,7 +92,7 @@ class NewEvent extends React.Component {
                     <textarea type="text" className="form-control" value={this.state.description} onChange={(event) => this.handleInputChange(event, "description")} placeholder="Event description" /> <br />
                 </form>
                 <Button type="button" onClick={(event) => this.handlePostEvent(event)} aria-label="post event" colored raised disabled={!postEnabled}>Post Event</Button>
-            </Cell>
+            </div>
         );
     }
 }
@@ -147,10 +147,10 @@ class EventsList extends React.Component {
         });
 
         return (
-            <Cell col={12}>
+            <div className="col-xs-10 col-xs-offset-1">
                 <h2>Upcoming Events</h2>
                 {eventItems}
-            </Cell>
+            </div>
         );
     }
 }
