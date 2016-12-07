@@ -15,6 +15,7 @@ import EventsPage from './EventsPage.js';
 import EventDetailsPage from './EventDetailsPage.js';
 import About from './About.js';
 import News from './News.js'
+import Resources from './Resources.js'
 
 var config = {
     apiKey: "AIzaSyC5kCRuH4inxJadApuiGxSon7E8b0zdLsM",
@@ -38,6 +39,7 @@ ReactDOM.render(
       <Route path="event/:eventId" component={EventDetailsPage} />
       <Route path="about" component={About}/>
       <Route path="news" component={News}/>
+      <Route path="resources" component={Resources}/>
     </Route>
   </Router>,
   document.getElementById('root')

@@ -5,15 +5,15 @@ import bruce from './img/bruce.jpg';
 import amy from './img/amy.jpg';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class Resources extends React.Component {
+class About extends React.Component {
   render() {
     return (
       <div>
       <div className="header-cont">
-        <header className="main-header about-header">
+        <header className="main-header resources-header">
         <div className="header-text">
-        <h1 className="header-title">About</h1>
-        <p className="header-desc">What INTL is and who we are</p>
+        <h1 className="header-title">Resources</h1>
+        <p className="header-desc">Where to go now</p>
         </div>
         </header>
         </div>
@@ -57,4 +57,4 @@ class Resources extends React.Component {
   }
 }
 
-export default Resources;
+export default About;

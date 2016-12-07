@@ -43,13 +43,14 @@ class App extends Component {
      <div>
        <MuiThemeProvider>
         <AppBar
-          title="Title"
+          title="INTL"
           iconElementLeft={<IconButton><MenuIcon /></IconButton>}
           onLeftIconButtonTouchTap={this.handleToggle}
           style={{backgroundColor: '#90A4AE',}}>
           <div id="topNav">
             <Link to="/main"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Homepage</FlatButton></Link>
             <Link to="/about"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >About</FlatButton></Link>
+            <Link to="/resources"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Resources</FlatButton></Link>
             <Link to="/news"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >News</FlatButton></Link>
             <Link to="/discussions"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Discussions</FlatButton></Link>
             <Link to="/events"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Events</FlatButton></Link>
@@ -60,11 +61,12 @@ class App extends Component {
             width={200}
             open={this.state.open}
             onRequestChange={(open) => {this.setState({open})} } >
-            <h3>TITLE</h3>
+            <h3 className="nav-label">INTL</h3>
             <Link to="/main"><MenuItem onTouchTap={this.handleClose} >Homepage</MenuItem></Link>
             <Link to="/about"><MenuItem onTouchTap={this.handleClose} >About</MenuItem></Link>
+            <Link to="/resources"><MenuItem onTouchTap={this.handleClose} >Resources</MenuItem></Link>
             <Link to="/news"><MenuItem onTouchTap={this.handleClose} >News</MenuItem></Link>
-            <h3>Member content</h3>
+            <h4 className="nav-label">Member content</h4>
             <Link to="/discussions"><MenuItem onTouchTap={this.handleClose} >Discussions</MenuItem></Link>
             <Link to="/events"><MenuItem onTouchTap={this.handleClose} >Events</MenuItem></Link>
             <br/>

@@ -287,6 +287,10 @@
   background-image: url('./img/eventsbanner.jpg');
 }
 
+.resources-header {
+  background-image: url('./img/resourcesbanner.jpg');
+}
+
 .header-text {
   color: white;
   padding: 20px;
@@ -303,6 +307,11 @@
 
 .list-item {
   font-style: italic;
+}
+
+.nav-label {
+  font-weight: lighter;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

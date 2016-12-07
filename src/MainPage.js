@@ -62,7 +62,7 @@ class MainPage extends React.Component {
                     <header className="main-header">
 
                     <div className="header-text">
-                    <h1 className="header-title">TITLE</h1>
+                    <h1 className="header-title">INTL</h1>
                     <p className="header-desc">A hub for international students</p>
                     <ul>
                     <li className="header-desc list-item">at UW</li>
