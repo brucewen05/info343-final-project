@@ -37,6 +37,7 @@ class EventsPage extends React.Component {
             </div>
             </header>
             </div>
+            <br/>
             <div className='container'>
                     <NewEvent />
                     <EventsList />
