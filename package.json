@@ -1,5 +1,6 @@
 {
   "name": "info343-final-project",
+  "homepage": "https://brucewen05.github.io/info343-final-project/build",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
