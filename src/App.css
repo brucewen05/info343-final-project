@@ -314,6 +314,17 @@
   text-align: center;
 }
 
+#resources-list {
+  list-style: none;
+  text-align: center;
+  padding: 2em;
+  font-size: 30px;
+}
+
+#resources-list a {
+  font-weight: 100;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
