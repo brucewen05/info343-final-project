@@ -180,6 +180,10 @@
   font-weight: bold;
 }
 
+.list-group{
+  padding-top: 20px;
+}
+
 .list-group h1 {
   font-size: 25px;
   margin-bottom: 10px;

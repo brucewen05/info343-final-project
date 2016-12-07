@@ -17,7 +17,7 @@ class About extends React.Component {
         </div>
         </header>
         </div>
-      <div id="about-container" className="container">
+      <div className="container">
         <div>
         <br/>
           <p>The current political and social climate in the United States of America has been pretty unstable as of late. It is not a particularly comfortable subject to talk about, especially for international students.
