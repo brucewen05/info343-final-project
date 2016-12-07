@@ -94,7 +94,7 @@ class StoryCard extends React.Component {
               {this.props.story.snippet}
             </CardText>
             <CardActions>
-              <a href={this.props.story.web_url}>
+              <a target="_blank" href={this.props.story.web_url}>
                 <RaisedButton label="Learn More" />
               </a>
             </CardActions>
