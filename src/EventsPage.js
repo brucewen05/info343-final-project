@@ -28,6 +28,7 @@ class EventsPage extends React.Component {
 
     render() {
         return (
+            <div className="container">
             <div className="row">
                 <div className="col-xs-10 col-xs-offset-1">
                     <img className="banner" src={eventsbanner} role="presentation" />
@@ -36,6 +37,7 @@ class EventsPage extends React.Component {
                 <NewEvent />
                 <EventsList />
             </div >
+            </div>
         );
     }
 }
