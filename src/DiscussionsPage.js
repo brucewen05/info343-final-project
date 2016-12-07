@@ -122,8 +122,8 @@ class DiscussionPage extends React.Component {
                         </div>
                     </div>
                     <Dialog open={this.state.modalOpen} style={{ 'width': '100%', 'height': '100%' }} >
-                        <DialogTitle>Create a new discussion post</DialogTitle>
-                        <DialogContent>
+                        <DialogTitle style={{width: "60%", margin:"auto"}}>Create a new discussion post</DialogTitle>
+                        <DialogContent style={{width: "60%", margin:"auto"}}>
                             <form>
                                 <div className="form-group">
                                     <label htmlFor="discussionTitleInput">Title</label> {' '}
@@ -134,11 +134,11 @@ class DiscussionPage extends React.Component {
                                 </div>
                             </form>
                         </DialogContent>
-                        <DialogActions>
+                        <DialogActions style={{width: "60%", margin:"auto"}}>
                             <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle} />{' '}Create</Button>
                             <Button type='button' onClick={this.closeModal} colored raised>Discard</Button>
                         </DialogActions>
-                        {!createButtonEnabled && <div className="has-error"><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
+                        {!createButtonEnabled && <div className="has-error" style={{width: "60%", margin:"auto"}}><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
                     </Dialog>
                 </div>
             </div>
