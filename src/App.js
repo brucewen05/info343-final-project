@@ -45,7 +45,8 @@ class App extends Component {
         <AppBar
           title="Title"
           iconElementLeft={<IconButton><MenuIcon /></IconButton>}
-          onLeftIconButtonTouchTap={this.handleToggle} >
+          onLeftIconButtonTouchTap={this.handleToggle}
+          style={{backgroundColor: '#90A4AE',}}>
           <div id="topNav">
             <Link to="/main"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >Homepage</FlatButton></Link>
             <Link to="/about"><FlatButton style={{color: 'white'}} onTouchTap={this.handleClose} >About</FlatButton></Link>
