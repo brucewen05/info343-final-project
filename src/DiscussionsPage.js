@@ -100,44 +100,44 @@ class DiscussionPage extends React.Component {
         }
 
         return (
-          <div>
-          <div className="header-cont">
-            <header className="main-header discussion-header">
-            <div className="header-text">
-            <h1 className="header-title">Discussions</h1>
-            <p className="header-desc">Ask or discuss & your peers will respond</p>
-            </div>
-            </header>
-            </div>
-            <br/>
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-10 col-xs-offset-1">
-                        <div className="list-group">
-                            {result}
+            <div>
+                <div className="header-cont">
+                    <header className="main-header discussion-header">
+                        <div className="header-text">
+                            <h1 className="header-title">Discussions</h1>
+                            <p className="header-desc">Ask or discuss & your peers will respond</p>
+                        </div>
+                    </header>
+                </div>
+                <br />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xs-10 col-xs-offset-1">
+                            <div className="list-group">
+                                {result}
+                            </div>
                         </div>
                     </div>
+                    <Dialog open={this.state.modalOpen} style={{ 'width': '100%', 'height': '100%' }} >
+                        <DialogTitle>Create a new discussion post</DialogTitle>
+                        <DialogContent>
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="discussionTitleInput">Title</label> {' '}
+                                    <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" value={this.state.title} />
+                                </div>
+                                <div className="form-group">
+                                    <textarea type="text" className="form-control" onChange={this.handleContentInputChange} placeholder="discussion content" value={this.state.content} />
+                                </div>
+                            </form>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle} />{' '}Create</Button>
+                            <Button type='button' onClick={this.closeModal} colored raised>Discard</Button>
+                        </DialogActions>
+                        {!createButtonEnabled && <div className="has-error"><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
+                    </Dialog>
                 </div>
-                <Dialog open={this.state.modalOpen} style={{ 'width': '100%', 'height': '100%' }} >
-                    <DialogTitle>Create a new discussion post</DialogTitle>
-                    <DialogContent>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="discussionTitleInput">Title</label> {' '}
-                                <input type="text" className="form-control" id="discussionTitleInput" onChange={this.handleTitleInputChange} placeholder="title" value={this.state.title} />
-                            </div>
-                            <div className="form-group">
-                                <textarea type="text" className="form-control" onChange={this.handleContentInputChange} placeholder="discussion content" value={this.state.content} />
-                            </div>
-                        </form>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button type='button' onClick={this.handleCreate} colored raised disabled={!createButtonEnabled}><Spinner style={spinnerSytle} />{' '}Create</Button>
-                        <Button type='button' onClick={this.closeModal} colored raised>Discard</Button>
-                    </DialogActions>
-                    {!createButtonEnabled && <div className="has-error"><div className="help-block creat-post-error-message">title or content cannot be empty</div></div>}
-                </Dialog>
-            </div>
             </div>
         );
     }
@@ -155,28 +155,30 @@ class DiscussionItem extends React.Component {
         var dislikes = this.count(this.props.discussionObj.dislikes);
 
         return (
-            <Link to={"/discussion/" + this.props.discussionId} className="list-group-item list-group-item-action">
-                <h1 className="list-group-item-heading">{this.props.discussionObj.title}</h1>
-                <p className="list-group-item-text dicussion-content">{this.props.discussionObj.content}</p>
-                <br />
-                <div className="list-group-item-text time-container">
-                    <span>Read more</span>
-                    <div></div>
-                    <span>
-                        <span><Icon name="thumb_up" /></span>{' '}
-                        <span className="thumb-up">{' '}{likes}</span>
-                    </span>
-                    <span className="thumb-down-container">
-                        <span><Icon name="thumb_down" /></span>{' '}
-                        <span className="thumb-down" >{' '}{dislikes}</span>
-                    </span>
-                    <div className="time-info">
-                        <span>created{' '}<Time value={this.props.discussionObj.createTime} relative /></span>
-                        {this.props.discussionObj.createTime !== this.props.discussionObj.editTime
-                            && <span className="edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative /></span>}
+            <div className="post">
+                <Link to={"/discussion/" + this.props.discussionId} className="list-group-item list-group-item-action">
+                    <h1 className="list-group-item-heading">{this.props.discussionObj.title}</h1>
+                    <p className="list-group-item-text dicussion-content">{this.props.discussionObj.content}</p>
+                    <br />
+                    <div className="list-group-item-text time-container">
+                        <span>Read more</span>
+                        <div></div>
+                        <span>
+                            <span><Icon name="thumb_up" /></span>{' '}
+                            <span className="thumb-up">{' '}{likes}</span>
+                        </span>
+                        <span className="thumb-down-container">
+                            <span><Icon name="thumb_down" /></span>{' '}
+                            <span className="thumb-down" >{' '}{dislikes}</span>
+                        </span>
+                        <div className="time-info">
+                            <span>created{' '}<Time value={this.props.discussionObj.createTime} relative /></span>
+                            {this.props.discussionObj.createTime !== this.props.discussionObj.editTime
+                                && <span className="edit-time">edited{' '}<Time value={this.props.discussionObj.editTime} relative /></span>}
+                        </div>
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </div>
         );
     }
 }

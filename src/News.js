@@ -44,18 +44,18 @@ class News extends React.Component {
 
     return (
       <div>
-      <div className="header-cont">
-        <header className="main-header news-header">
-        <div className="header-text">
-        <h1 className="header-title">News</h1>
-        <p className="header-desc">A newsfeed focusing on immigration matters straight from the NYTimes.</p>
+        <div className="header-cont">
+          <header className="main-header news-header">
+            <div className="header-text">
+              <h1 className="header-title">News</h1>
+              <p className="header-desc">A newsfeed focusing on immigration matters straight from the NYTimes.</p>
+            </div>
+          </header>
         </div>
-        </header>
+        <div className="container">
+          <br />
+          {content}
         </div>
-      <div className="container">
-      <br/>
-        {content}
-      </div>
       </div>
     )
   }
@@ -84,19 +84,21 @@ class StoryCard extends React.Component {
     //  console.log(news);
 
     return (
-      <MuiThemeProvider>
-        <Card>
-          <CardTitle title={this.props.story.headline.main} subtitle={this.props.story.pub_date} />
-          <CardText>
-            {this.props.story.snippet}
-          </CardText>
-          <CardActions>
-            <a href={this.props.story.web_url}>
-              <FlatButton label="Learn More" />
-            </a>
-          </CardActions>
-        </Card>
-      </MuiThemeProvider>
+      <div className="post">
+        <MuiThemeProvider>
+          <Card>
+            <CardTitle title={this.props.story.headline.main} subtitle={this.props.story.pub_date} />
+            <CardText>
+              {this.props.story.snippet}
+            </CardText>
+            <CardActions>
+              <a href={this.props.story.web_url}>
+                <FlatButton label="Learn More" />
+              </a>
+            </CardActions>
+          </Card>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }
