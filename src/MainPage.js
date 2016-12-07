@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import firebase from 'firebase';
 import Time from 'react-time';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class MainPage extends React.Component {
@@ -87,7 +87,7 @@ class MainPage extends React.Component {
                         <div id="main-about-wrapper">
                         <p id="main-about">In this time of social and political conflict in the United States, INTL hopes to help international students in Seattle stay informed. We aim to unite and create a community in our area. INTL was created by three students at the University of Washington.</p>
                         <MuiThemeProvider>
-                        <Link to="/about"><FlatButton label="Learn more about INTL"></FlatButton></Link>
+                        <Link to="/about"><RaisedButton label="Learn more about INTL"></RaisedButton></Link>
                         </MuiThemeProvider>
                         </div>
                     </div>

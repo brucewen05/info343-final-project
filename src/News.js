@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class News extends React.Component {
@@ -95,7 +95,7 @@ class StoryCard extends React.Component {
             </CardText>
             <CardActions>
               <a href={this.props.story.web_url}>
-                <FlatButton label="Learn More" />
+                <RaisedButton label="Learn More" />
               </a>
             </CardActions>
           </Card>
