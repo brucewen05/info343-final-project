@@ -1,3 +1,5 @@
+/* Formatting, size, and styles for different elements */
+
 .App {
   text-align: center;
 }
@@ -337,15 +339,6 @@
   padding-top: 0.5em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (max-width: 768px) {
-    .banner, #topNav { display: none; }
-}
-
 .post {
   margin-bottom: 25px;
 }
@@ -353,4 +346,14 @@
 .event-info {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* when the page is less than 768, hide the header description and top navigation links */
+@media (max-width: 768px) {
+    .header-desc, #topNav { display: none; }
 }

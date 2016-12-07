@@ -5,7 +5,8 @@ import bruce from './img/bruce.jpg';
 import amy from './img/amy.jpg';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class About extends React.Component {
+//content for the resources page containing different resources
+class Resources extends React.Component {
   render() {
     return (
       <div>
@@ -34,4 +35,4 @@ class About extends React.Component {
   }
 }
 
-export default About;
+export default Resources;

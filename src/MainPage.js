@@ -11,6 +11,7 @@ class MainPage extends React.Component {
 
         this.state = {'discussions': null};
     }
+    //controls for when the user is signed in or out, gets the discussions for the discussion preview
     componentDidMount() {
         // Add a listener and callback for authentication events
         this.unregister = firebase.auth().onAuthStateChanged(user => {
@@ -34,6 +35,7 @@ class MainPage extends React.Component {
         });
     }
 
+    //if the user is signed in, they can see the discussions, if they aren't they can't click through
     componentWillUnmount() {
         //unregister listeners
         if (this.discussionRef) {
@@ -44,6 +46,7 @@ class MainPage extends React.Component {
         }
     }
 
+    //render the main page: header, about preview, feature (discussion, news, events) preview cards
     render() {
         var discussionContent = undefined;
         if (this.state.discussions) {

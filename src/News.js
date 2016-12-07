@@ -10,6 +10,7 @@ class News extends React.Component {
     this.state = { news: undefined }
     this.fetchData = this.fetchData.bind(this);
   }
+  //fetches data from NYT API
   fetchData() {
     var thisComponent = this;
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
@@ -30,18 +31,19 @@ class News extends React.Component {
       });
   }
 
-
-
+  //fetch data upon load
   componentDidMount() {
     this.fetchData();
   }
 
+  //render stories after the fetch
   render() {
     var content = null;
     if (this.state.news) {
       content = <Stories storiesObj={this.state.news} />;
     }
 
+    //return news page
     return (
       <div>
         <div className="header-cont">
@@ -61,7 +63,7 @@ class News extends React.Component {
   }
 }
 
-//component UpcomingLaunches is the container for all of the launch cards
+//component Stories is the container for all of the launch cards
 class Stories extends React.Component {
   render() {
     var news = this.props.storiesObj.docs;
@@ -77,7 +79,7 @@ class Stories extends React.Component {
   }
 }
 
-//component LaunchCard takes all the different launches and creates a "card" of information for each launch
+//component StoryCard takes all the different stories and creates a "card" of information for each story
 class StoryCard extends React.Component {
   render() {
     //  var news = this.props.stories.docs;

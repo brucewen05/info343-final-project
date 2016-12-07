@@ -9,10 +9,12 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import FlatButton from 'material-ui/FlatButton';
+//get necessary elements for material-ui
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+//main framework for the whole site
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,15 +23,15 @@ class App extends Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
-
+  //handle the opening of the nav menu drawer
   handleToggle() {
     this.setState({open: !this.state.open});
   }
-
+  //handle the closing of the nav menu drawer
   handleClose() {
     this.setState({open: false});
   }
-
+  //handle signing out
   handleSignOut() {
     this.setState({open: false});
     if (firebase.auth().currentUser) {
@@ -37,7 +39,7 @@ class App extends Component {
     }
     hashHistory.push("/login");
   }
-
+  //contains the app bar, navigation drawer
   render() {
     return (
      <div>
@@ -82,31 +84,38 @@ class App extends Component {
   }
 }
 
+//if the user is signed in, only show the sign out button and show "user signed in as"
+//if the user is signed out, only show the sign in option
 class SignInOrOut extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {link: '', touchTap: null, text: ''}
+    this.state = {link: '', touchTap: null, text: '', signedIn: '', signedInAs:''}
   }
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         console.log('should be able to log out');
         this.setState({link: '/main', touchTap: this.props.handleSignOut, text: 'Sign Out'})
-
+        this.setState({signedIn: user.email, signedInAs: 'Signed in as: '})
       }
       else{
         console.log('should be able to log in');
         this.setState({link: '/login', touchTap: this.props.handleClose, text: 'Sign In'})
+        this.setState({signedIn: '', signedInAs: ''})
       }
     })
   }
   render() {
     return (
+      <div>
+      <p>{this.state.signedInAs}{this.state.signedIn}</p>
       <Link to={this.state.link}><MenuItem onTouchTap={this.state.touchTap}><ArrowIcon />{' '}{this.state.text}</MenuItem></Link>
+      </div>
     );
   }
 }
 
+//show sign in or sign out in app bar based on auth state
 class SignInOrOutTop extends React.Component {
   constructor(props) {
     super(props);

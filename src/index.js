@@ -17,6 +17,7 @@ import About from './About.js';
 import News from './News.js'
 import Resources from './Resources.js'
 
+// firebase config
 var config = {
     apiKey: "AIzaSyC5kCRuH4inxJadApuiGxSon7E8b0zdLsM",
     authDomain: "info-343-final-project.firebaseapp.com",
@@ -26,6 +27,7 @@ var config = {
   };
 firebase.initializeApp(config);
 
+//render react routing in DOM
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
